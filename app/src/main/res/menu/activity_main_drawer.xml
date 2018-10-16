@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_mydashboard"
+            android:icon="@drawable/dash"
+            android:title="My Dashboard" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/contact1"
+            android:title="My Contact" />
+
+        <item
+            android:id="@+id/nav_newtask"
+            android:icon="@drawable/create"
+            android:title="Create Task" />
+       <!-- <item
+            android:id="@+id/nav_mytask"
+            android:icon="@drawable/baseline_format_list_numbered_black_48dp"
+            android:title="My Task" />-->
+        <item
+            android:id="@+id/nav_mytodo"
+            android:icon="@drawable/todo"
+            android:title="My Todo" />
+        <item
+            android:id="@+id/nav_assigntask"
+            android:icon="@drawable/assign"
+            android:title="Assign Task" />
+
+        <item
+            android:id="@+id/nav_closetask"
+            android:icon="@drawable/close"
+            android:title="Close Task" />
+
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/profile"
+            android:title="My Profile" />
+
+
+
+        <item
+            android:id="@+id/nav_add_contact"
+            android:icon="@drawable/add_users"
+            android:title="Add Users" />
+
+
+        <item
+            android:id="@+id/nav_group"
+            android:icon="@drawable/group"
+            android:title="Groups" />
+
+        <item
+            android:id="@+id/nav_mygroupTask"
+            android:icon="@drawable/grouptask"
+            android:title="My Groups Task" />
+
+
+
+    </group>
+
+
+</menu>

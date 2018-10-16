@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin_User"
+    android:background="@drawable/bg">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:id="@+id/textlogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/header"
+            android:textSize="40dp"
+            style="@style/Cursive"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/logo"
+            android:textColor="@color/white"
+            android:layout_marginBottom="50dp"
+            android:letterSpacing="0.1"/>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Enter your details to start"
+            android:textSize="20dp"
+            android:fontFamily="sans-serif-light"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/logo"
+            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"
+            android:letterSpacing="0.1"/>
+
+
+        <Button
+            android:id="@+id/admin"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="13dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/cw_button_shadow3"
+            android:textSize="16sp"
+            android:text="Admin Registration"
+            android:fontFamily="sans-serif-light"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/user"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_bg"
+            android:fontFamily="sans-serif-medium"
+            android:text="User Registration"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

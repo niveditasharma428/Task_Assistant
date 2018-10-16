@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#283E56</color>
+    <color name="colorPrimaryDark">#22344A</color>
+   <!-- <color name="acttionbar">#905961</color>-->
+    <color name="colorAccent">#000</color>
+
+
+    <color name="colorPrimaryDark1">#22344A</color>
+    <color name="colorPrimary1">#283E56</color>
+    <color name="colorAccent1">#000</color>
+
+    <color name="PrimaryText">#212121</color>
+    <color name="SecondaryText">#757575</color>
+
+    <color name="bluedark">#2f333f</color>
+    <color name="bluelight">#49acd5</color>
+    <color name="green1">#45bc62</color>
+    <color name="orange">#eaad43</color>
+
+
+    <color name="white">#FFFFFF</color>
+    <color name="offwhite">#ECF0F1</color>
+
+    <color name="title">#212121</color>
+    <color name="sub_title">#757575</color>
+
+    #fafafa
+    <color name="transparent">#00000000</color>
+    <color name="gradStart">#19AA8B</color>
+    <color name="gradStop">#23A7D8</color>
+    <color name="buy">#00BFFF</color>
+
+
+
+    <color name="black">#000</color>
+    <color name="backgroundFragment">#2b2b2b</color>
+
+    <color name="background">#CD853F</color>
+    <color name="card_color">#31435b</color>
+    <color name="tool_bar">#20A2B2</color>
+    <color name="header">#20A2B2</color>
+
+    <color name="grey_dark">#696969</color>
+    <color name="bg_screen1">#f64c73</color>
+    <color name="logo_color">#191970</color>
+    <color name="dot_active">#e5e5e5</color>
+
+    <color name="backgroundcolor">#fcfcfc</color>
+    <color name="lightgray">#ededed</color>
+    <color name="deeppurple">#7c4dff</color>
+    <color name="yello">#ffb300</color>
+    <color name="green">#00b0c5</color>
+   <!-- <color name="darkblue">#3366ff</color>-->
+    <color name="darkblue">#25D366</color>
+   <!-- <color name="darkblue">#f74748</color>-->
+    <color name="testcolorblue">#152b38</color>
+    <color name="pink">#f74748</color>
+    <color name="bottomText">#6b6b7b</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="light_grey">#737B80</color>
+
+
+</resources>

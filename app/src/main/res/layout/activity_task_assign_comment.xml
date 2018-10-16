@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/taskassignupdate"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:tools="http://schemas.android.com/tools"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:orientation="vertical"
+tools:context=".TaskAssignComment">
+
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorPrimary"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+    app:popupTheme="@style/AppTheme.PopupOverlay"
+    app:title="Edit"
+    app:titleMarginStart="28dp"
+    app:titleTextColor="@color/white" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/bg_screen1"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+
+
+<android.support.v7.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:elevation="2dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp"
+    android:fontFamily="sans-serif-medium"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="0.0px"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    app:cardElevation="2dp"
+    android:layout_marginTop="20dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardPreventCornerOverlap="false">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:hint="Description"
+        android:textSize="18dp"
+        android:padding="5dp"
+        android:textColor="#156995"
+        android:textColorHint="#156995"/>
+
+    <TextView
+        android:id="@+id/etDes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:hint="Description"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:textSize="16dp"
+        android:padding="5dp"
+        android:textColor="#696969"
+        android:textColorHint="#696969"/>
+
+</android.support.v7.widget.CardView>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="45dp"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <Button android:id="@+id/reassign"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Reassign"
+        android:layout_margin="5dp"
+        android:textAllCaps="false"
+        android:textColor="#fff" />
+
+    <Button
+        android:id ="@+id/close"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:text="Close"
+        android:layout_margin="5dp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/button_bg_stroke"/>
+
+</LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".Discription"
+android:background="@drawable/bg">
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true">
+</FrameLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+   <TextView
+        android:id="@+id/Create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="setting up things..."
+        style="@style/Regular"
+        android:textSize="15dp"
+        android:textColor="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+
+   <ProgressBar
+        android:id="@+id/signin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:indeterminateTint="#fff"
+        android:textSize="19dp"
+        android:padding="16dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textlogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/header"
+            android:textSize="40dp"
+            style="@style/RegularCondensed"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/logo"
+            android:textColor="@color/white"
+            android:layout_marginBottom="50dp"
+            android:letterSpacing="0.1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Simply"
+            android:textSize="40dp"
+            style="@style/Regular"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/logo"
+            android:textColor="@color/white"
+            android:layout_marginTop="40dp"
+            android:letterSpacing="0.1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Work Together "
+            android:textSize="30dp"
+            android:textStyle="bold"
+            style="@style/Regular"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/logo"
+            android:textColor="@color/dot_active"
+            android:layout_marginTop="05dp"
+            android:letterSpacing="0.1"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="The most intuitive project and\n task management tool. "
+            android:textSize="15dp"
+            style="@style/Regular"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/logo"
+            android:textColor="@color/dot_active"
+            android:layout_marginTop="15dp"
+            android:letterSpacing="0.1"/>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+</RelativeLayout>
