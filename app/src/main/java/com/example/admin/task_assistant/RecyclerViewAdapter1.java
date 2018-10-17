@@ -37,7 +37,7 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewAdapt
 
 
             t1 = (TextView) itemView.findViewById(R.id.title);
-          //  t2 = (TextView) itemView.findViewById(R.id.priority);
+            //  t2 = (TextView) itemView.findViewById(R.id.priority);
             t3 = (TextView) itemView.findViewById(R.id.comment);
             t4 = (TextView) itemView.findViewById(R.id.assign);
             t6 = (TextView) itemView.findViewById(R.id.status);

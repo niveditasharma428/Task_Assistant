@@ -1,37 +1,38 @@
+
 package com.example.admin.task_assistant;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.content.SharedPreferences;
+        import android.os.Bundle;
+        import android.support.design.widget.NavigationView;
+        import android.support.v4.view.GravityCompat;
+        import android.support.v4.widget.DrawerLayout;
+        import android.support.v7.app.ActionBarDrawerToggle;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.LinearLayoutManager;
+        import android.support.v7.widget.RecyclerView;
+        import android.support.v7.widget.Toolbar;
+        import android.view.GestureDetector;
+        import android.view.Menu;
+        import android.view.MenuItem;
+        import android.view.MotionEvent;
+        import android.view.View;
+        import android.widget.LinearLayout;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import com.example.admin.task_assistant.Network.APIClient;
-import com.example.admin.task_assistant.model.CloseData;
-import com.example.admin.task_assistant.model.CloseTaskDetails;
-import java.util.ArrayList;
-import java.util.List;
-import retrofit2.Call;
-import retrofit2.Callback;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+        import com.example.admin.task_assistant.Network.APIClient;
+        import com.example.admin.task_assistant.model.CloseData;
+        import com.example.admin.task_assistant.model.CloseTaskDetails;
+        import java.util.ArrayList;
+        import java.util.List;
+        import retrofit2.Call;
+        import retrofit2.Callback;
+        import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+        import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Close extends AppCompatActivity
+public class GroupCloseTask extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolbar;
 
@@ -68,7 +69,7 @@ public class Close extends AppCompatActivity
                 .setFontAttrId(R.attr.fontPath)
                 .build());
 
-        setContentView(R.layout.activity_my_todo_task);
+        setContentView(R.layout.activity_group_close_task);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_24dp);
         setSupportActionBar(toolbar);
@@ -94,12 +95,12 @@ public class Close extends AppCompatActivity
         name = pref.getString("name", "");
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
-        name1.setText(name);
+       name1.setText(name);
         email1.setText(email);
 
         ListOfcontact4 = new ArrayList<>();
-        recyclerView6 = (RecyclerView) findViewById(R.id.my_recycler_view4);
-      //  recyclerView7 = (RecyclerView) findViewById(R.id.my_recycler_view5);
+       // recyclerView6 = (RecyclerView) findViewById(R.id.my_recycler_view4);
+        recyclerView7 = (RecyclerView) findViewById(R.id.my_recycler_view5);
        // txt1 = (TextView) findViewById(R.id.txt1);
        // txt2 = (TextView) findViewById(R.id.txt2);
 
@@ -138,10 +139,9 @@ public class Close extends AppCompatActivity
         }
         else
         {
-            Toast.makeText(Close.this, "error", Toast.LENGTH_LONG).show();
+            Toast.makeText(GroupCloseTask.this, "error", Toast.LENGTH_LONG).show();
 
         }
-
         Call<CloseData> closetask = APIClient.getInstance().closeTask(name);
 
         closetask.enqueue(new Callback<CloseData>() {
@@ -160,8 +160,7 @@ public class Close extends AppCompatActivity
 
                         for (int i = 0; i < closeTaskDetails1.size(); i++) {
                             String task_desc = closeTaskDetails1.get(i).getTASK_DES();
-                            String assign = closeTaskDetails1.get(i).getTASK_ASSIGN();
-                            String task_assign=assign.substring(0,assign.indexOf('-'));
+                            String task_assign = closeTaskDetails1.get(i).getTASK_ASSIGN();
                             String task_priority = closeTaskDetails1.get(i).getTASK_PRIORITY();
                             String task_group = closeTaskDetails1.get(i).getTASK_GROUP();
                             String task_id = closeTaskDetails1.get(i).getTASK_ID();
@@ -187,16 +186,16 @@ public class Close extends AppCompatActivity
 
                         }
 
-                        recyclerViewadapter6 = new RecyclerViewAdapter6(aluser1, getApplicationContext());
-                       // recyclerViewadapter7 = new RecyclerViewAdapter7(aluser2, getApplicationContext());
+                     //   recyclerViewadapter6 = new RecyclerViewAdapter6(aluser1, getApplicationContext());
+                        recyclerViewadapter7 = new RecyclerViewAdapter7(aluser2, getApplicationContext());
 
                         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         LinearLayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext());
 
-                        recyclerView6.setLayoutManager(mLayoutManager);
-                        recyclerView6.setAdapter(recyclerViewadapter6);
-                       // recyclerView7.setLayoutManager(mLayoutManager1);
-                       // recyclerView7.setAdapter(recyclerViewadapter7);
+                       // recyclerView6.setLayoutManager(mLayoutManager);
+                       // recyclerView6.setAdapter(recyclerViewadapter6);
+                        recyclerView7.setLayoutManager(mLayoutManager1);
+                        recyclerView7.setAdapter(recyclerViewadapter7);
 
                     }
                 }
@@ -229,61 +228,61 @@ public class Close extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_contact) {
-            Intent intent = new Intent(Close.this, MyContact.class);
+            Intent intent = new Intent(GroupCloseTask.this, MyContact.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_assigntask) {
-            Intent intent = new Intent(Close.this, TaskAssign.class);
+            Intent intent = new Intent(GroupCloseTask.this, TaskAssign.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_newtask) {
-            Intent intent = new Intent(Close.this, NewTask.class);
+            Intent intent = new Intent(GroupCloseTask.this, NewTask.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_closetask) {
-            Intent intent = new Intent(Close.this, Close.class);
+            Intent intent = new Intent(GroupCloseTask.this, Close.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_profile) {
-            Intent intent = new Intent(Close.this, Profile.class);
+            Intent intent = new Intent(GroupCloseTask.this, Profile.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_mydashboard) {
-            Intent intent = new Intent(Close.this, Dashboard.class);
+            Intent intent = new Intent(GroupCloseTask.this, Dashboard.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_add_contact) {
-            Intent intent = new Intent(Close.this, Add_Contact.class);
+            Intent intent = new Intent(GroupCloseTask.this, Add_Contact.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.nav_mytodo) {
-            Intent intent = new Intent(Close.this, MyTodoTask.class);
+            Intent intent = new Intent(GroupCloseTask.this, MyTodoTask.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.nav_group) {
-            Intent intent = new Intent(Close.this, Group.class);
+            Intent intent = new Intent(GroupCloseTask.this, Group.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
         else if (id == R.id.nav_mygroupTask) {
-            Intent intent = new Intent(Close.this, MyGroupTask.class);
+            Intent intent = new Intent(GroupCloseTask.this, MyGroupTask.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
         else if (id == R.id.nav_mygroups) {
-            Intent intent = new Intent(Close.this, MyGroups.class);
+            Intent intent = new Intent(GroupCloseTask.this, MyGroups.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
 
-        else if (id == R.id.nav_closegrouptask) {
-            Intent intent = new Intent(Close.this, GroupCloseTask.class);
+        else if (id == R.id.nav_closetask) {
+            Intent intent = new Intent(GroupCloseTask.this, Close.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
@@ -342,3 +341,4 @@ public class Close extends AppCompatActivity
     }
 
 }
+

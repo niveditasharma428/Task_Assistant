@@ -1,54 +1,55 @@
+
 package com.example.admin.task_assistant;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.app.ProgressDialog;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.content.SharedPreferences;
+        import android.os.Bundle;
+        import android.support.design.widget.NavigationView;
+        import android.support.v4.view.GravityCompat;
+        import android.support.v4.widget.DrawerLayout;
+        import android.support.v7.app.ActionBarDrawerToggle;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.LinearLayoutManager;
+        import android.support.v7.widget.RecyclerView;
+        import android.support.v7.widget.Toolbar;
+        import android.view.GestureDetector;
+        import android.view.Menu;
+        import android.view.MenuItem;
+        import android.view.MotionEvent;
+        import android.view.View;
+        import android.widget.LinearLayout;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.admin.task_assistant.Network.APIClient;
-import com.example.admin.task_assistant.model.MyTodo;
-import com.example.admin.task_assistant.model.MyTodoDetails;
+        import com.android.volley.AuthFailureError;
+        import com.android.volley.DefaultRetryPolicy;
+        import com.android.volley.Request;
+        import com.android.volley.RequestQueue;
+        import com.android.volley.Response;
+        import com.android.volley.RetryPolicy;
+        import com.android.volley.VolleyError;
+        import com.android.volley.toolbox.StringRequest;
+        import com.android.volley.toolbox.Volley;
+        import com.example.admin.task_assistant.Network.APIClient;
+        import com.example.admin.task_assistant.model.MyTodo;
+        import com.example.admin.task_assistant.model.MyTodoDetails;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+        import org.json.JSONException;
+        import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+        import java.util.ArrayList;
+        import java.util.HashMap;
+        import java.util.List;
+        import java.util.Map;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+        import retrofit2.Call;
+        import retrofit2.Callback;
+        import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+        import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MyTodoTask extends AppCompatActivity
+public class MyGroupTodo extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolbar;
 
@@ -86,7 +87,7 @@ public class MyTodoTask extends AppCompatActivity
                 .setFontAttrId(R.attr.fontPath)
                 .build());
 
-        setContentView(R.layout.activity_my_todo_task);
+        setContentView(R.layout.activity_my_group_todo);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_24dp);
         setSupportActionBar(toolbar);
@@ -116,15 +117,15 @@ public class MyTodoTask extends AppCompatActivity
         email1.setText(email);
 
         ListOfcontact4 = new ArrayList<>();
-        recyclerView1 = (RecyclerView) findViewById(R.id.my_recycler_view4);
-       // recyclerView2 = (RecyclerView) findViewById(R.id.my_recycler_view5);
+        //recyclerView1 = (RecyclerView) findViewById(R.id.my_recycler_view4);
+        recyclerView2 = (RecyclerView) findViewById(R.id.my_recycler_view5);
         //  recyclerViewadapter4 = new RecyclerViewAdapter4(ListOfcontact4, getApplicationContext());
 
 
         contactData();
 
 
-        recyclerView1.addOnItemTouchListener(new MyTask.RecyclerTouchListener(this,
+      /*  recyclerView1.addOnItemTouchListener(new MyTask.RecyclerTouchListener(this,
                 recyclerView1, new MyTask.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
@@ -138,13 +139,13 @@ public class MyTodoTask extends AppCompatActivity
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(MyTodoTask.this, "Long press on position :" + position,
+                Toast.makeText(MyGroupTodo.this, "Long press on position :" + position,
                         Toast.LENGTH_LONG).show();
             }
-        }));
+        }));*/
 
 
-       /* recyclerView2.addOnItemTouchListener(new MyTask.RecyclerTouchListener(this,
+        recyclerView2.addOnItemTouchListener(new MyTask.RecyclerTouchListener(this,
                 recyclerView2, new MyTask.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
@@ -158,10 +159,10 @@ public class MyTodoTask extends AppCompatActivity
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(MyTodoTask.this, "Long press on position :" + position,
+                Toast.makeText(MyGroupTodo.this, "Long press on position :" + position,
                         Toast.LENGTH_LONG).show();
             }
-        }));*/
+        }));
 
         pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
         usertyp = pref.getString("usertyp", "");
@@ -194,7 +195,7 @@ public class MyTodoTask extends AppCompatActivity
         }
         else
         {
-            Toast.makeText(MyTodoTask.this, "error", Toast.LENGTH_LONG).show();
+            Toast.makeText(MyGroupTodo.this, "error", Toast.LENGTH_LONG).show();
 
         }
 
@@ -240,7 +241,7 @@ public class MyTodoTask extends AppCompatActivity
                             } else {
                                 //Displaying a toast if the otp entered is wrong
                                 Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(MyTodoTask.this, MyTask.class);
+                                Intent intent = new Intent(MyGroupTodo.this, MyTask.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -255,7 +256,7 @@ public class MyTodoTask extends AppCompatActivity
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(MyTodoTask.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(MyGroupTodo.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -282,7 +283,7 @@ public class MyTodoTask extends AppCompatActivity
 
     public void contactData() {
 
-        progressDialog = new ProgressDialog(MyTodoTask.this);
+        progressDialog = new ProgressDialog(MyGroupTodo.this);
         progressDialog.setMessage("Loading, please wait...");
         progressDialog.show();
 
@@ -328,16 +329,16 @@ public class MyTodoTask extends AppCompatActivity
 
 
                         }
-                        recyclerViewadapter4 = new RecyclerViewAdapter4(aluser1, getApplicationContext());
-                       // recyclerViewadapter5 = new RecyclerViewAdapter5(aluser2, getApplicationContext());
+                      //  recyclerViewadapter4 = new RecyclerViewAdapter4(aluser1, getApplicationContext());
+                        recyclerViewadapter5 = new RecyclerViewAdapter5(aluser2, getApplicationContext());
 
                         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         LinearLayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext());
 
-                        recyclerView1.setLayoutManager(mLayoutManager);
-                        recyclerView1.setAdapter(recyclerViewadapter4);
-                        //recyclerView2.setLayoutManager(mLayoutManager1);
-                        //recyclerView2.setAdapter(recyclerViewadapter5);
+                      //  recyclerView1.setLayoutManager(mLayoutManager);
+                      //  recyclerView1.setAdapter(recyclerViewadapter4);
+                        recyclerView2.setLayoutManager(mLayoutManager1);
+                        recyclerView2.setAdapter(recyclerViewadapter5);
 
                     }
                 }
@@ -369,67 +370,62 @@ public class MyTodoTask extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_contact) {
-            Intent intent = new Intent(MyTodoTask.this, MyContact.class);
+            Intent intent = new Intent(MyGroupTodo.this, MyContact.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_assigntask) {
-            Intent intent = new Intent(MyTodoTask.this, TaskAssign.class);
+            Intent intent = new Intent(MyGroupTodo.this, TaskAssign.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_newtask) {
-            Intent intent = new Intent(MyTodoTask.this, NewTask.class);
+            Intent intent = new Intent(MyGroupTodo.this, NewTask.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_closetask) {
-            Intent intent = new Intent(MyTodoTask.this, Close.class);
+            Intent intent = new Intent(MyGroupTodo.this, Close.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_profile) {
-            Intent intent = new Intent(MyTodoTask.this, Profile.class);
+            Intent intent = new Intent(MyGroupTodo.this, Profile.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_mydashboard) {
-            Intent intent = new Intent(MyTodoTask.this, Dashboard.class);
+            Intent intent = new Intent(MyGroupTodo.this, Dashboard.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_add_contact) {
-            Intent intent = new Intent(MyTodoTask.this, Add_Contact.class);
+            Intent intent = new Intent(MyGroupTodo.this, Add_Contact.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.nav_mytodo) {
-            Intent intent = new Intent(MyTodoTask.this, MyTodoTask.class);
+            Intent intent = new Intent(MyGroupTodo.this, MyTodoTask.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.nav_group) {
-            Intent intent = new Intent(MyTodoTask.this, Group.class);
+            Intent intent = new Intent(MyGroupTodo.this, Group.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
         else if (id == R.id.nav_group) {
-            Intent intent = new Intent(MyTodoTask.this, Group.class);
+            Intent intent = new Intent(MyGroupTodo.this, Group.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
         else if (id == R.id.nav_mygroupTask) {
-            Intent intent = new Intent(MyTodoTask.this, MyGroupTask.class);
+            Intent intent = new Intent(MyGroupTodo.this, MyGroupTask.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
         else if (id == R.id.nav_mygroups) {
-            Intent intent = new Intent(MyTodoTask.this, MyGroups.class);
-            startActivity(intent);
-            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
-        }
-        else if (id == R.id.nav_mygrouptodo) {
-            Intent intent = new Intent(MyTodoTask.this, MyGroupTodo.class);
+            Intent intent = new Intent(MyGroupTodo.this, MyGroups.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
@@ -487,3 +483,4 @@ public class MyTodoTask extends AppCompatActivity
     }
 
 }
+

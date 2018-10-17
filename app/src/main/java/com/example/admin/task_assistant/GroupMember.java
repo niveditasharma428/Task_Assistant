@@ -32,7 +32,7 @@ public class GroupMember extends AppCompatActivity {
     ImageView iv, iv_delete;
     SwipeRefreshLayout swipeRefreshLayout;
     SharedPreferences pref;
-    String mobile, name, groupName, groupMembers, groupcreatedby;
+    String mobile, name, groupName, groupMembers, groupcreatedby,usertyp;
     List<MemberDetails> memberDetailsList;
 
 
@@ -52,6 +52,7 @@ public class GroupMember extends AppCompatActivity {
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
         mobile = pref.getString("mobile", "");
         name = pref.getString("name", "");
+        usertyp = pref.getString("usertyp", "");
         recyclerView = (RecyclerView) findViewById(R.id.recyclemem);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
         iv = (ImageView) findViewById(R.id.backArrow);
@@ -74,15 +75,28 @@ public class GroupMember extends AppCompatActivity {
             System.out.println("GroupMmeberException:-" + e);
         }
 
+        if (!usertyp.equalsIgnoreCase("txtadmin")) {
 
-        iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), Group.class);
-                startActivity(i);
 
-            }
-        });
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), MyGroups.class);
+                    startActivity(i);
+
+                }
+            });
+        }
+        else {
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), Group.class);
+                    startActivity(i);
+
+                }
+            });
+        }
 
         showMemberAdapter = new ShowMemberAdapter(GroupMember.this, al, groupName, groupMembers, groupcreatedby);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

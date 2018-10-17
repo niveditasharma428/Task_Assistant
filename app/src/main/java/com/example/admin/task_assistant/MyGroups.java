@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.admin.task_assistant.Network.APIClient;
 import com.example.admin.task_assistant.adapter.MyGroupsTaskAdapter;
 import com.example.admin.task_assistant.adapter.ShowMyGroupAdapter;
@@ -97,20 +99,39 @@ public class MyGroups extends AppCompatActivity
         name1.setText(name);
         email1.setText(email);
 
-        pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
+        pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
         usertyp = pref.getString("usertyp", "");
 
-        createdBy = pref.getString("name", "");
 
-        System.out.println("Task_Login:-" + usertyp);
+        System.out.println("Task_Login:-"+usertyp);
 
-        if (!usertyp.equalsIgnoreCase("txtadmin")) {
+        if(!usertyp.equalsIgnoreCase("txtadmin")) {
+
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(false);
+            nav_Menu.findItem(R.id.nav_group).setVisible(false);
+            nav_Menu.findItem(R.id.nav_closegrouptask).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygroups).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(true);
 
-        } else {
+        }
+        else if(usertyp.equalsIgnoreCase("txtadmin"))
+        {
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(true);
+            nav_Menu.findItem(R.id.nav_group).setVisible(true);
+            nav_Menu.findItem(R.id.nav_closegrouptask).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygroups).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(false);
+
+
+        }
+        else
+        {
+            Toast.makeText(MyGroups.this, "error", Toast.LENGTH_LONG).show();
+
         }
 
         System.out.println("FragGroupCreatedBy:-" + createdBy);

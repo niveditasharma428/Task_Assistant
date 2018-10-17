@@ -1,41 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MyTodoTask"
-    android:orientation="vertical"
-    tools:showIn="@layout/app_bar_my_todo_task">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+tools:context=".Close"
+tools:showIn="@layout/app_bar_close">
 
-    <TextView
-        android:id="@+id/txt1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My Task"
-        android:gravity="center"
-        android:background="@color/black_overlay"
-        android:textColor="#ffffff"
-        android:padding="5dp"
-        />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_recycler_view4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/txt2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My Group Task"
-        android:gravity="center"
-        android:background="@color/black_overlay"
-        android:textColor="#ffffff"
-        android:padding="5dp"
-        />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_recycler_view5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/my_recycler_view4"
+    android:scrollbars="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
 
 </LinearLayout>

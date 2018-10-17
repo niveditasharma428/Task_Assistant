@@ -22,7 +22,7 @@ public class ShowMemberAdapter extends RecyclerView.Adapter<ShowMemberAdapter.My
     Context context;
     List<MemberPD> memberslist;
     ArrayList al;
-    String groupName, groupMember, name,groupcreatedby;
+    String groupName, groupMember, name,groupcreatedby,usertyp;
     SharedPreferences pref;
 
 
@@ -40,6 +40,7 @@ public class ShowMemberAdapter extends RecyclerView.Adapter<ShowMemberAdapter.My
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycleshowmembers, parent, false);
         pref = context.getSharedPreferences("Options", context.MODE_PRIVATE);
         name = pref.getString("name", "");
+        usertyp = pref.getString("usertyp", "");
 
         return new ShowMemberAdapter.MyViewHolder(view);
 
@@ -61,31 +62,33 @@ public class ShowMemberAdapter extends RecyclerView.Adapter<ShowMemberAdapter.My
         }
         else
         {
+
             holder.textadminName.setVisibility(View.GONE);
         }
 
+        if (usertyp.equalsIgnoreCase("txtadmin")) {
 
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("textviewname:-" + holder.txt_name.getText().toString() + name);
+            holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    System.out.println("textviewname:-" + holder.txt_name.getText().toString() + name);
 
-                String txtname = holder.txt_name.getText().toString().trim();
+                    String txtname = holder.txt_name.getText().toString().trim();
 
-                if (!name.equalsIgnoreCase(txtname)) {
+                    if (!name.equalsIgnoreCase(txtname)) {
 
-                    Intent i = new Intent(context, GroupTaskAssistant.class);
-                    i.putExtra("groupmember", memberDetails.getName().toString());
-                    i.putExtra("groupname", groupName);
-                    i.putExtra("memberlis", groupMember);
-                    i.putExtra("groupcreatedby", groupcreatedby);
-                    context.startActivity(i);
+                        Intent i = new Intent(context, GroupTaskAssistant.class);
+                        i.putExtra("groupmember", memberDetails.getName().toString());
+                        i.putExtra("groupname", groupName);
+                        i.putExtra("memberlis", groupMember);
+                        i.putExtra("groupcreatedby", groupcreatedby);
+                        context.startActivity(i);
+                    }
+
+
                 }
-
-
-
-            }
-        });
+            });
+        }
 
     }
 

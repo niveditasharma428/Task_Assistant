@@ -37,8 +37,9 @@ public class MyGroupsTaskAdapter extends RecyclerView.Adapter<MyGroupsTaskAdapte
         holder.t1.setText(groupTaskDetails.getTASK_DES());
         //holder.t2.setText(groupTaskDetails.getTASK_PRIORITY());
         holder.t3.setText(groupTaskDetails.getTASK_COMMENT());
-       // holder.t6.setText(groupTaskDetails.getTASK_STATUS());
+      //  holder.t6.setText(groupTaskDetails.getTASK_STATUS());
         holder.t4.setText(groupTaskDetails.getTASK_ASSIGN());
+
 
         if(groupTaskDetails.getTASK_PRIORITY().equalsIgnoreCase("High")){
             holder.high.setVisibility(View.VISIBLE);
@@ -56,9 +57,6 @@ public class MyGroupsTaskAdapter extends RecyclerView.Adapter<MyGroupsTaskAdapte
             holder.done_task.setVisibility(View.VISIBLE);
         }
 
-
-
-
     }
 
     @Override
@@ -69,21 +67,22 @@ public class MyGroupsTaskAdapter extends RecyclerView.Adapter<MyGroupsTaskAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView img;
+        ImageView low,high;
         public TextView t1, t2, t3, t4, t5, t6,active_task,in_process_task,done_task;
         LinearLayout data;
-        ImageView low,high;
         public LinearLayout linearLayout;
         public CardView cardView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             t1 = (TextView) itemView.findViewById(R.id.title);
-            t2 = (TextView) itemView.findViewById(R.id.priority);
+          //  t2 = (TextView) itemView.findViewById(R.id.priority);
             t3 = (TextView) itemView.findViewById(R.id.comment);
             t4 = (TextView) itemView.findViewById(R.id.assign);
-            t6 = (TextView) itemView.findViewById(R.id.status);
+           // t6 = (TextView) itemView.findViewById(R.id.status);
             cardView = (CardView) itemView.findViewById(R.id.cv1);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.layout1);
+
 
             high= (ImageView) itemView.findViewById(R.id.high);
             low= (ImageView) itemView.findViewById(R.id.low);

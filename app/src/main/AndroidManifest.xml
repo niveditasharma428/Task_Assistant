@@ -96,7 +96,15 @@
         <activity android:name=".GroupTaskAsignComment" />
         <activity android:name=".EditGroups" />
         <activity android:name=".MyGroupTask" />
-        <activity android:name=".MyGroups"></activity>
+        <activity android:name=".MyGroups" />
+        <activity
+            android:name=".MyGroupTodo"
+            android:label="@string/title_activity_my_group_todo"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".GroupCloseTask"
+            android:label="@string/title_activity_group_close_task"
+            android:theme="@style/AppTheme2"></activity>
     </application>
 
 </manifest>

@@ -1,50 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fillViewport="true">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+app:layout_behavior="@string/appbar_scrolling_view_behavior"
+tools:context=".MyGroupTodo"
+tools:showIn="@layout/app_bar_my_group_todo">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="50dp"
-
-
-
-        >
-
-        <TextView
-            android:id="@+id/txt1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black_overlay"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="My Task"
-            android:textColor="#ffffff" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/my_recycler_view4"
-            android:layout_width="match_parent"
-            android:layout_height="230dp" />
-
-        <TextView
-            android:id="@+id/txt2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black_overlay"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="My Group Task"
-            android:textColor="#ffffff" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/my_recycler_view5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"/>
-
-    </LinearLayout>
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/my_recycler_view4"
+    android:scrollbars="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
 
 </LinearLayout>
+

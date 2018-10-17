@@ -82,7 +82,7 @@ public class GroupFragmentAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         String title = null;
         if (position == 0 && source.equalsIgnoreCase("group")) {
-            title = "Created Groups";
+            title = "MY Groups";
         } else if (position == 0 && source.equalsIgnoreCase("task")) {
             title = "View Task";
         } else if (position == 1 && source.equalsIgnoreCase("group")) {

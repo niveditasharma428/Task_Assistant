@@ -74,11 +74,24 @@ public class MyTaskComment extends AppCompatActivity implements View.OnClickList
                 .build());
 
         setContentView(R.layout.activity_my_task_comment);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        // toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_24dp);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_24dp);
         setSupportActionBar(toolbar);
 
-        //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(MyTaskComment.this, MyTask.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("CREATED_BY", CREATED_BY);
+                intent.putExtra("GROUP_NAME", GROUP_NAME);
+                startActivity(intent);
+                overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+
+            }
+        });
 
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
         name = pref.getString("name", "");

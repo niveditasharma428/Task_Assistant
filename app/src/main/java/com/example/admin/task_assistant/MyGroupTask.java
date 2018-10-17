@@ -18,14 +18,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.admin.task_assistant.Network.APIClient;
 import com.example.admin.task_assistant.adapter.MyGroupsTaskAdapter;
 import com.example.admin.task_assistant.model.GroupTask;
 import com.example.admin.task_assistant.model.GroupTaskDetails;
-import com.example.admin.task_assistant.model.MyGroups;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +42,7 @@ public class MyGroupTask extends AppCompatActivity
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     String createdBy;
-    RecyclerView recyclerView,recyclerView1;
+    RecyclerView recyclerView;
     List<GroupTaskDetails> groupTaskDetailsList;
     ProgressDialog progressDialog;
     MyGroupsTaskAdapter myGroupsTaskAdapter;
@@ -65,8 +67,8 @@ public class MyGroupTask extends AppCompatActivity
                 .setFontAttrId(R.attr.fontPath)
                 .build());
 
-        setContentView(R.layout.activity_my_group_task);
 
+        setContentView(R.layout.activity_my_group_task);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_24dp);
         setSupportActionBar(toolbar);
@@ -84,15 +86,15 @@ public class MyGroupTask extends AppCompatActivity
         email1 = (TextView) view.findViewById(R.id.mailid);
         t3 = (TextView) findViewById(R.id.count);
         recyclerView=(RecyclerView)findViewById(R.id.my_recycler_view4);
-        recyclerView1=(RecyclerView)findViewById(R.id.my_recycler_view5);
-        txt1=(TextView)findViewById(R.id.txt1);
-        txt2=(TextView)findViewById(R.id.txt2);
+       // recyclerView1=(RecyclerView)findViewById(R.id.my_recycler_view5);
+       // txt1=(TextView)findViewById(R.id.txt1);
+       // txt2=(TextView)findViewById(R.id.txt2);
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        recyclerView1.setVisibility(View.GONE);
-        txt1.setVisibility(View.GONE);
-        txt2.setVisibility(View.GONE);
+//        recyclerView1.setVisibility(View.GONE);
+//        txt1.setVisibility(View.GONE);
+ //       txt2.setVisibility(View.GONE);
 
 
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
@@ -107,15 +109,36 @@ public class MyGroupTask extends AppCompatActivity
 
         createdBy = pref.getString("name", "");
 
-        System.out.println("Task_Login:-" + usertyp);
 
-        if (!usertyp.equalsIgnoreCase("txtadmin")) {
+        System.out.println("Task_Login:-"+usertyp);
+
+        if(!usertyp.equalsIgnoreCase("txtadmin")) {
+
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(false);
+            nav_Menu.findItem(R.id.nav_group).setVisible(false);
+            nav_Menu.findItem(R.id.nav_closegrouptask).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygroups).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(true);
 
-        } else {
+        }
+        else if(usertyp.equalsIgnoreCase("txtadmin"))
+        {
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(true);
+            nav_Menu.findItem(R.id.nav_group).setVisible(true);
+            nav_Menu.findItem(R.id.nav_closegrouptask).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygroups).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(false);
+
+
+        }
+        else
+        {
+            Toast.makeText(MyGroupTask.this, "error", Toast.LENGTH_LONG).show();
+
         }
 
         System.out.println("FragGroupCreatedBy:-" + createdBy);
@@ -135,9 +158,9 @@ public class MyGroupTask extends AppCompatActivity
                         groupTaskDetailsList = groupTask.getGroupTaskDetails();
                         System.out.println("DivyaGroupTaskDetailsNo:-" + groupTaskDetailsList.size());
                         if (groupTaskDetailsList.size() == 0) {
-                         //   txtnorec.setVisibility(View.VISIBLE);
+                            //   txtnorec.setVisibility(View.VISIBLE);
                         } else {
-                          //  txtnorec.setVisibility(View.GONE);
+                            //  txtnorec.setVisibility(View.GONE);
                         }
                         for (int i = 0; i < groupTaskDetailsList.size(); i++) {
                             String TASK_ID = groupTaskDetailsList.get(i).getTASK_ID().toString();
@@ -146,11 +169,11 @@ public class MyGroupTask extends AppCompatActivity
                             String TASK_PRIORITY = groupTaskDetailsList.get(i).getTASK_PRIORITY();
                             String TASK_STATUS = groupTaskDetailsList.get(i).getTASK_STATUS();
                             String TASK_GROUP = groupTaskDetailsList.get(i).getTASK_GROUP();
-                            String TASK_ASSIGN1 = groupTaskDetailsList.get(i).getTASK_ASSIGN();
-                            String TASK_ASSIGN = TASK_ASSIGN1.substring(0, TASK_ASSIGN1.indexOf('-'));
+                            String assign = groupTaskDetailsList.get(i).getTASK_ASSIGN();
+                            String TASK_ASSIGN = assign.substring(0, assign.indexOf('-'));
                             al.add(new GroupTaskDetails(TASK_ID, TASK_DES, TASK_COMMENT, TASK_PRIORITY, TASK_STATUS, TASK_GROUP, TASK_ASSIGN));
 
-                            System.out.println("DivyaAL:-" + TASK_ID + TASK_ASSIGN);
+                            System.out.println("DivyaAL:-" + TASK_ID + TASK_ASSIGN+TASK_PRIORITY+TASK_STATUS);
                         }
 
                         myGroupsTaskAdapter = new MyGroupsTaskAdapter(getApplicationContext(), al);
@@ -231,7 +254,7 @@ public class MyGroupTask extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.nav_mytodo) {
-            Intent intent = new Intent(MyGroupTask.this, MyTodoTask.class);
+            Intent intent = new Intent(MyGroupTask.this, MyGroupTodo.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.nav_group) {
@@ -244,12 +267,6 @@ public class MyGroupTask extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
-        else if (id == R.id.nav_mygroups) {
-            Intent intent = new Intent(MyGroupTask.this, com.example.admin.task_assistant.MyGroups.class);
-            startActivity(intent);
-            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
-        }
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

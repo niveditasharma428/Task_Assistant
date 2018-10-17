@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.task_assistant.adapter.GroupFragmentAdapter;
 import com.example.admin.task_assistant.fragment.FragAddGroupUser;
@@ -86,19 +87,39 @@ public class Group extends AppCompatActivity
         email1.setText(email);
 
         System.out.println("DivyaAdminCred:-"+admin_name+"--"+admin_mob);
-
-        pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
+        pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
         usertyp = pref.getString("usertyp", "");
 
-        System.out.println("Task_Login:-" + usertyp);
 
-        if (!usertyp.equalsIgnoreCase("txtadmin")) {
+        System.out.println("Task_Login:-"+usertyp);
+
+        if(!usertyp.equalsIgnoreCase("txtadmin")) {
+
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(false);
+            nav_Menu.findItem(R.id.nav_group).setVisible(false);
+            nav_Menu.findItem(R.id.nav_closegrouptask).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygroups).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(true);
 
-        } else {
+        }
+        else if(usertyp.equalsIgnoreCase("txtadmin"))
+        {
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(true);
+            nav_Menu.findItem(R.id.nav_group).setVisible(true);
+            nav_Menu.findItem(R.id.nav_closegrouptask).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygroups).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(false);
+
+
+        }
+        else
+        {
+            Toast.makeText(Group.this, "error", Toast.LENGTH_LONG).show();
+
         }
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);

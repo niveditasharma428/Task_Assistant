@@ -108,16 +108,23 @@ public class Dashboard extends AppCompatActivity
 
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(false);
-            nav_Menu.findItem(R.id.nav_mygroups).setVisible(true);
             nav_Menu.findItem(R.id.nav_group).setVisible(false);
+            nav_Menu.findItem(R.id.nav_closegrouptask).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygroups).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(true);
 
         }
         else if(usertyp.equalsIgnoreCase("txtadmin"))
         {
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(true);
-            nav_Menu.findItem(R.id.nav_mygroups).setVisible(false);
             nav_Menu.findItem(R.id.nav_group).setVisible(true);
+            nav_Menu.findItem(R.id.nav_closegrouptask).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygroups).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(false);
+
 
         }
         else
