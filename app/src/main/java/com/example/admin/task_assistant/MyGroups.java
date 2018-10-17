@@ -20,9 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.admin.task_assistant.Network.APIClient;
 import com.example.admin.task_assistant.adapter.MyGroupsTaskAdapter;
+import com.example.admin.task_assistant.adapter.ShowMyGroupAdapter;
 import com.example.admin.task_assistant.model.GroupTask;
 import com.example.admin.task_assistant.model.GroupTaskDetails;
-import com.example.admin.task_assistant.model.MyGroups;
+import com.example.admin.task_assistant.model.MyGroupMemberDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MyGroupTask extends AppCompatActivity
+public class MyGroups extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
@@ -40,10 +41,10 @@ public class MyGroupTask extends AppCompatActivity
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     String createdBy;
-    RecyclerView recyclerView,recyclerView1;
-    List<GroupTaskDetails> groupTaskDetailsList;
-    ProgressDialog progressDialog;
-    MyGroupsTaskAdapter myGroupsTaskAdapter;
+    RecyclerView recyclerView;
+    ShowMyGroupAdapter showMyGroupAdapter;
+    List<MyGroupMemberDetails> myGroupMemberDetails;
+
 
     TextView name1, email1, t3;
     String mobile, TASK_ID, name, email, CREATED_BY, usertyp;
@@ -65,7 +66,7 @@ public class MyGroupTask extends AppCompatActivity
                 .setFontAttrId(R.attr.fontPath)
                 .build());
 
-        setContentView(R.layout.activity_my_group_task);
+        setContentView(R.layout.activity_mygroups);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_24dp);
@@ -83,16 +84,10 @@ public class MyGroupTask extends AppCompatActivity
         name1 = (TextView) view.findViewById(R.id.name);
         email1 = (TextView) view.findViewById(R.id.mailid);
         t3 = (TextView) findViewById(R.id.count);
-        recyclerView=(RecyclerView)findViewById(R.id.my_recycler_view4);
-        recyclerView1=(RecyclerView)findViewById(R.id.my_recycler_view5);
-        txt1=(TextView)findViewById(R.id.txt1);
-        txt2=(TextView)findViewById(R.id.txt2);
+
+        recyclerView = (RecyclerView)findViewById(R.id.recshowgroup);
 
         navigationView.setNavigationItemSelectedListener(this);
-
-        recyclerView1.setVisibility(View.GONE);
-        txt1.setVisibility(View.GONE);
-        txt2.setVisibility(View.GONE);
 
 
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
@@ -119,54 +114,36 @@ public class MyGroupTask extends AppCompatActivity
         }
 
         System.out.println("FragGroupCreatedBy:-" + createdBy);
-        progressDialog = new ProgressDialog(MyGroupTask.this);
-        progressDialog.setMessage("Loading, please wait...");
-        progressDialog.show();
 
-        Call<GroupTask> mygrouptasks = APIClient.getInstance().mygrouptasks(mobile);
+        Call<com.example.admin.task_assistant.model.MyGroups> myallgroups = APIClient.getInstance().myallgroups(mobile);
 
-        mygrouptasks.enqueue(new Callback<GroupTask>() {
+        myallgroups.enqueue(new Callback<com.example.admin.task_assistant.model.MyGroups>() {
             @Override
-            public void onResponse(Call<GroupTask> call, Response<GroupTask> response) {
+            public void onResponse(Call<com.example.admin.task_assistant.model.MyGroups> call, Response<com.example.admin.task_assistant.model.MyGroups> response) {
                 if (response.isSuccessful()) {
-                    GroupTask groupTask = response.body();
                     ArrayList al = new ArrayList();
-                    if (groupTask.getSuccess().equalsIgnoreCase("1")) {
-                        groupTaskDetailsList = groupTask.getGroupTaskDetails();
-                        System.out.println("DivyaGroupTaskDetailsNo:-" + groupTaskDetailsList.size());
-                        if (groupTaskDetailsList.size() == 0) {
-                         //   txtnorec.setVisibility(View.VISIBLE);
-                        } else {
-                          //  txtnorec.setVisibility(View.GONE);
-                        }
-                        for (int i = 0; i < groupTaskDetailsList.size(); i++) {
-                            String TASK_ID = groupTaskDetailsList.get(i).getTASK_ID().toString();
-                            String TASK_DES = groupTaskDetailsList.get(i).getTASK_DES();
-                            String TASK_COMMENT = groupTaskDetailsList.get(i).getTASK_COMMENT();
-                            String TASK_PRIORITY = groupTaskDetailsList.get(i).getTASK_PRIORITY();
-                            String TASK_STATUS = groupTaskDetailsList.get(i).getTASK_STATUS();
-                            String TASK_GROUP = groupTaskDetailsList.get(i).getTASK_GROUP();
-                            String TASK_ASSIGN1 = groupTaskDetailsList.get(i).getTASK_ASSIGN();
-                            String TASK_ASSIGN = TASK_ASSIGN1.substring(0, TASK_ASSIGN1.indexOf('-'));
-                            al.add(new GroupTaskDetails(TASK_ID, TASK_DES, TASK_COMMENT, TASK_PRIORITY, TASK_STATUS, TASK_GROUP, TASK_ASSIGN));
+                    myGroupMemberDetails = response.body().getMyGroupMemberDetails();
 
-                            System.out.println("DivyaAL:-" + TASK_ID + TASK_ASSIGN);
-                        }
-
-                        myGroupsTaskAdapter = new MyGroupsTaskAdapter(getApplicationContext(), al);
-                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                        recyclerView.setLayoutManager(mLayoutManager);
-                        recyclerView.setAdapter(myGroupsTaskAdapter);
-                        progressDialog.dismiss();
-
-
+                    for (int i = 0; i < myGroupMemberDetails.size(); i++) {
+                        String groupname = myGroupMemberDetails.get(i).getGROUP_NAME();
+                        String groupcreatedby = myGroupMemberDetails.get(i).getCREATED_BY();
+                        String createddate = myGroupMemberDetails.get(i).getCREATED_DATE();
+                        System.out.println("DivyaGroupCreatedBy:-" + groupcreatedby);
+                        al.add(new MyGroupMemberDetails(groupname, groupcreatedby,createddate));
                     }
+
+                    showMyGroupAdapter = new ShowMyGroupAdapter(getApplicationContext(), al);
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setAdapter(showMyGroupAdapter);
+                  // progressDialog.dismiss();
+
                 }
             }
 
             @Override
-            public void onFailure(Call<GroupTask> call, Throwable t) {
-                progressDialog.dismiss();
+            public void onFailure(Call<com.example.admin.task_assistant.model.MyGroups> call, Throwable t) {
+
             }
         });
 
@@ -197,55 +174,55 @@ public class MyGroupTask extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_contact) {
-            Intent intent = new Intent(MyGroupTask.this, MyContact.class);
+            Intent intent = new Intent(MyGroups.this, MyContact.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_assigntask) {
-            Intent intent = new Intent(MyGroupTask.this, TaskAssign.class);
+            Intent intent = new Intent(MyGroups.this, TaskAssign.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_newtask) {
-            Intent intent = new Intent(MyGroupTask.this, NewTask.class);
+            Intent intent = new Intent(MyGroups.this, NewTask.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_closetask) {
-            Intent intent = new Intent(MyGroupTask.this, Close.class);
+            Intent intent = new Intent(MyGroups.this, Close.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_profile) {
-            Intent intent = new Intent(MyGroupTask.this, Profile.class);
+            Intent intent = new Intent(MyGroups.this, Profile.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_mydashboard) {
-            Intent intent = new Intent(MyGroupTask.this, Dashboard.class);
+            Intent intent = new Intent(MyGroups.this, Dashboard.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         } else if (id == R.id.nav_add_contact) {
-            Intent intent = new Intent(MyGroupTask.this, Add_Contact.class);
+            Intent intent = new Intent(MyGroups.this, Add_Contact.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.nav_mytodo) {
-            Intent intent = new Intent(MyGroupTask.this, MyTodoTask.class);
+            Intent intent = new Intent(MyGroups.this, MyTodoTask.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.nav_group) {
-            Intent intent = new Intent(MyGroupTask.this, Group.class);
+            Intent intent = new Intent(MyGroups.this, Group.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
         else if (id == R.id.nav_mygroupTask) {
-            Intent intent = new Intent(MyGroupTask.this, MyGroupTask.class);
+            Intent intent = new Intent(MyGroups.this, MyGroups.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
         else if (id == R.id.nav_mygroups) {
-            Intent intent = new Intent(MyGroupTask.this, com.example.admin.task_assistant.MyGroups.class);
+            Intent intent = new Intent(MyGroups.this, MyGroups.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }

@@ -108,12 +108,16 @@ public class Dashboard extends AppCompatActivity
 
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(false);
+            nav_Menu.findItem(R.id.nav_mygroups).setVisible(true);
+            nav_Menu.findItem(R.id.nav_group).setVisible(false);
 
         }
         else if(usertyp.equalsIgnoreCase("txtadmin"))
         {
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(true);
+            nav_Menu.findItem(R.id.nav_mygroups).setVisible(false);
+            nav_Menu.findItem(R.id.nav_group).setVisible(true);
 
         }
         else
@@ -282,6 +286,12 @@ public class Dashboard extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
+        else if (id == R.id.nav_mygroups) {
+            Intent intent = new Intent(Dashboard.this, MyGroups.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+
 
 
 

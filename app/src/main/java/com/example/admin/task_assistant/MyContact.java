@@ -316,6 +316,12 @@ public class MyContact extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
+        else if (id == R.id.nav_mygroups) {
+            Intent intent = new Intent(MyContact.this, MyGroups.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+
 
 
 

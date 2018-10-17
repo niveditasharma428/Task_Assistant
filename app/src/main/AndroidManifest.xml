@@ -95,7 +95,8 @@
         <activity android:name=".GroupTaskAssistant" />
         <activity android:name=".GroupTaskAsignComment" />
         <activity android:name=".EditGroups" />
-        <activity android:name=".MyGroupTask"></activity>
+        <activity android:name=".MyGroupTask" />
+        <activity android:name=".MyGroups"></activity>
     </application>
 
 </manifest>

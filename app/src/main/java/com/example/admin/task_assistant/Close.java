@@ -255,6 +255,12 @@ public class Close extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
+        else if (id == R.id.nav_mygroups) {
+            Intent intent = new Intent(Close.this, MyGroups.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+
 
 
 

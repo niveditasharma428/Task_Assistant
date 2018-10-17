@@ -60,6 +60,11 @@
             android:icon="@drawable/grouptask"
             android:title="My Groups Task" />
 
+        <item
+            android:id="@+id/nav_mygroups"
+            android:icon="@drawable/grouptask"
+            android:title="My Groups" />
+
 
 
     </group>

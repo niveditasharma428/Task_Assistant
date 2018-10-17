@@ -52,14 +52,14 @@ public class GroupFragmentAdapter extends FragmentPagerAdapter {
         } else if (position == 1 && source.equalsIgnoreCase("task")) {
             fragment = new FragAssignGroupTask();
             fragment.setArguments(bundle);
-        } else if (position == 2 && source.equalsIgnoreCase("group")) {
+        } /*else if (position == 2 && source.equalsIgnoreCase("group")) {
             fragment = new FragMyGroup();
             fragment.setArguments(bundle);
         }
        else if (position == 2 && source.equalsIgnoreCase("task")) {
             fragment = new FragMyGroupTask();
             fragment.setArguments(bundle);
-        }
+        }*/
         return fragment;
        // return mFragmentList.get(position);
     }
@@ -69,7 +69,7 @@ public class GroupFragmentAdapter extends FragmentPagerAdapter {
 
        /* System.out.println("DivyaTabCounts:-"+mFragmentList.size());
         return mFragmentList.size();*/
-       return  3;
+       return  2;
     }
 
   /*  @Override
@@ -89,12 +89,12 @@ public class GroupFragmentAdapter extends FragmentPagerAdapter {
             title = "Create Groups";
         } else if (position == 1 && source.equalsIgnoreCase("task")) {
             title = "Assign Task";
-        } else if (position == 2 && source.equalsIgnoreCase("group")) {
+        }/* else if (position == 2 && source.equalsIgnoreCase("group")) {
             title = "My Groups";
         } else if (position == 2 && source.equalsIgnoreCase("task")) {
             title = "My Group Tasks";
         }
-
+*/
         return title;
     }
 
