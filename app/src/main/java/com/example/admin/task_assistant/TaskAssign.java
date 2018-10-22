@@ -94,6 +94,7 @@ public class TaskAssign extends AppCompatActivity
 
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
         create = (TextView)view.findViewById(R.id.Create);
 

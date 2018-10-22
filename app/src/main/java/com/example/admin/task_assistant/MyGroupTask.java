@@ -91,6 +91,7 @@ public class MyGroupTask extends AppCompatActivity
        // txt2=(TextView)findViewById(R.id.txt2);
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
 //        recyclerView1.setVisibility(View.GONE);
 //        txt1.setVisibility(View.GONE);

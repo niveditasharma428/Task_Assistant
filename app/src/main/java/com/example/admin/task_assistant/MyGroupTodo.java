@@ -22,7 +22,6 @@ package com.example.admin.task_assistant;
         import android.widget.LinearLayout;
         import android.widget.TextView;
         import android.widget.Toast;
-
         import com.android.volley.AuthFailureError;
         import com.android.volley.DefaultRetryPolicy;
         import com.android.volley.Request;
@@ -35,15 +34,12 @@ package com.example.admin.task_assistant;
         import com.example.admin.task_assistant.Network.APIClient;
         import com.example.admin.task_assistant.model.MyTodo;
         import com.example.admin.task_assistant.model.MyTodoDetails;
-
         import org.json.JSONException;
         import org.json.JSONObject;
-
         import java.util.ArrayList;
         import java.util.HashMap;
         import java.util.List;
         import java.util.Map;
-
         import retrofit2.Call;
         import retrofit2.Callback;
         import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -108,6 +104,7 @@ public class MyGroupTodo extends AppCompatActivity
         name1.setText(bundle.getString("name", String.valueOf(bundle)));
         email1.setText(bundle.getString("email", String.valueOf(bundle)));*/
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
         name = pref.getString("name", "");

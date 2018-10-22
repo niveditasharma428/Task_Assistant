@@ -16,14 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.task_assistant.adapter.GroupFragmentAdapter;
-import com.example.admin.task_assistant.fragment.FragAddGroupUser;
-import com.example.admin.task_assistant.fragment.FragGroup;
-import com.example.admin.task_assistant.fragment.FragMyGroup;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -76,6 +72,7 @@ public class Group extends AppCompatActivity
         t3 = (TextView) findViewById(R.id.count);
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
         pref = getApplicationContext().getSharedPreferences("Options", MODE_PRIVATE);
         name = pref.getString("name", "");
@@ -215,6 +212,18 @@ public class Group extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
+        else if (id == R.id.nav_mygrouptodo) {
+            Intent intent = new Intent(Group.this, MyGroupTodo.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        else if (id == R.id.nav_closegrouptask) {
+            Intent intent = new Intent(Group.this, GroupCloseTask.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+
+
 
 
 

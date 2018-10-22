@@ -5,13 +5,15 @@ public class Contact {
     public String Name;
     public String Phone;
     public String Tag;
+    public String Profile;
    // public String id;
 
 
-    public Contact(String name, String phone,String tag) {
+    public Contact(String name, String phone,String tag,String profile) {
         this.Name = name;
         this.Phone = phone;
         this.Tag = tag;
+        this.Profile = profile;
 
     }
 
@@ -43,5 +45,15 @@ public class Contact {
     public void setTag(String usertag) {
 
         this.Tag = usertag;
+    }
+
+    public String getImage() {
+
+        return Profile;
+    }
+
+    public void setImage(String userprofile) {
+
+        this.Profile = userprofile;
     }
 }

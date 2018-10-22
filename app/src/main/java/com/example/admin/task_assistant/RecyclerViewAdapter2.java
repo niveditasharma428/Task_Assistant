@@ -2,6 +2,7 @@ package com.example.admin.task_assistant;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,8 +22,10 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +34,9 @@ import java.util.Map;
 public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolder> {
     List<Contact2> mData2 = new ArrayList<>();
     Context context2;
+    ImageView imageView;
     LinearLayout rootLayout;
+    SharedPreferences prefm;
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -58,6 +64,8 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
             active_task= (TextView) itemView.findViewById(R.id.active);
             in_process_task=(TextView)itemView.findViewById(R.id.in_process);
             done_task=(TextView)itemView.findViewById(R.id.done);
+
+            imageView= (ImageView) itemView.findViewById(R.id.imageViewt);
 
 
             rootLayout= (LinearLayout) itemView.findViewById(R.id.rootLayout);
@@ -92,6 +100,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
     public RecyclerViewAdapter2.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item2, parent, false);
+
 
         return new RecyclerViewAdapter2.ViewHolder(view);
 

@@ -5,31 +5,33 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +58,9 @@ public class MyContact extends AppCompatActivity
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+
+    SharedPreferences prefm;
+    SharedPreferences.Editor editorm;
 
     private static String MY_CONTACT_URL = "https://orgone.solutions/task/userdata.php";
 
@@ -104,6 +109,7 @@ public class MyContact extends AppCompatActivity
 
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
         name = pref.getString("name", "");
@@ -111,8 +117,6 @@ public class MyContact extends AppCompatActivity
         mobile = pref.getString("mobile", "");
         name1.setText(name);
         email1.setText(email);
-
-
 
         ListOfcontact = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view2);
@@ -190,8 +194,9 @@ public class MyContact extends AppCompatActivity
                         String name = jsonObject.getString("name");
                         String phone = jsonObject.getString("mobile_no");
                         String tag = jsonObject.getString("tag");
+                        String image=jsonObject.getString("USER_PHOTO");
 
-                        Contact mData = new Contact(name, phone,tag);
+                        Contact mData = new Contact(name, phone,tag,image);
 
                         ListOfcontact.add(mData);
                         recyclerView.setAdapter(recyclerViewadapter);
@@ -319,13 +324,7 @@ public class MyContact extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
-        else if (id == R.id.nav_group) {
-            Intent intent = new Intent(MyContact.this, Group.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
-        }
+
         else if (id == R.id.nav_mygroupTask) {
             Intent intent = new Intent(MyContact.this, MyGroupTask.class);
             startActivity(intent);
@@ -333,6 +332,17 @@ public class MyContact extends AppCompatActivity
         }
         else if (id == R.id.nav_mygroups) {
             Intent intent = new Intent(MyContact.this, MyGroups.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+
+        else if (id == R.id.nav_mygrouptodo) {
+            Intent intent = new Intent(MyContact.this, MyGroupTodo.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        else if (id == R.id.nav_closegrouptask) {
+            Intent intent = new Intent(MyContact.this, GroupCloseTask.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }

@@ -107,6 +107,7 @@ public class MyTodoTask extends AppCompatActivity
         name1.setText(bundle.getString("name", String.valueOf(bundle)));
         email1.setText(bundle.getString("email", String.valueOf(bundle)));*/
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
         name = pref.getString("name", "");
@@ -430,6 +431,11 @@ public class MyTodoTask extends AppCompatActivity
         }
         else if (id == R.id.nav_mygrouptodo) {
             Intent intent = new Intent(MyTodoTask.this, MyGroupTodo.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        else if (id == R.id.nav_closegrouptask) {
+            Intent intent = new Intent(MyTodoTask.this, GroupCloseTask.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }

@@ -1,6 +1,5 @@
 package com.example.admin.task_assistant;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,14 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.task_assistant.Network.APIClient;
-import com.example.admin.task_assistant.adapter.MyGroupsTaskAdapter;
 import com.example.admin.task_assistant.adapter.ShowMyGroupAdapter;
-import com.example.admin.task_assistant.model.GroupTask;
-import com.example.admin.task_assistant.model.GroupTaskDetails;
 import com.example.admin.task_assistant.model.MyGroupMemberDetails;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -90,6 +87,7 @@ public class MyGroups extends AppCompatActivity
         recyclerView = (RecyclerView)findViewById(R.id.recshowgroup);
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
 
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
@@ -247,6 +245,20 @@ public class MyGroups extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
+        else if (id == R.id.nav_mygroups) {
+            Intent intent = new Intent(MyGroups.this, MyGroups.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        else if (id == R.id.nav_mygroupTask) {
+            Intent intent = new Intent(MyGroups.this, MyGroupTask.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+
+
+
+
 
 
 

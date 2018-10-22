@@ -4,18 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.view.Menu;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -25,20 +27,24 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    String TASK_ID,name,email,mobile,usertyp;
+    String TASK_ID,name,email,mobile,usertyp,mImageUri;
     TextView close_task,re_assign,in_process,done,active;
-    SharedPreferences pref;
+    SharedPreferences pref,prefm;
     TextView name1,email1;
+    ImageView image1;
     CardView c1,c2,c3,c4,c5;
 
     private static String DASHBOARD_URL = "https://orgone.solutions/task/dashbord.php";
@@ -88,6 +94,7 @@ public class Dashboard extends AppCompatActivity
         name1 = (TextView)view.findViewById(R.id.name);
         email1 = (TextView)view.findViewById(R.id.mailid);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
         name=pref.getString("name", "");
         email=pref.getString("email", "");
@@ -131,7 +138,24 @@ public class Dashboard extends AppCompatActivity
         {
             Toast.makeText(Dashboard.this, "error", Toast.LENGTH_LONG).show();
 
+
         }
+
+/*
+
+        prefm =getSharedPreferences("Picture", 0);
+        mImageUri = prefm.getString("Image", "");
+
+        System.out.println("Response:-"+mImageUri);
+
+        if (!TextUtils.isEmpty(mImageUri))  {
+            Picasso.with(getApplicationContext()).load(mImageUri)
+                    .into(image1);
+        } else {
+            image1.setImageResource(R.drawable.profile_girl);
+        }
+*/
+
     }
 
     public void dashboard(String dashboardUrl,final String mobile) {
@@ -295,6 +319,16 @@ public class Dashboard extends AppCompatActivity
         }
         else if (id == R.id.nav_mygroups) {
             Intent intent = new Intent(Dashboard.this, MyGroups.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        else if (id == R.id.nav_mygrouptodo) {
+            Intent intent = new Intent(Dashboard.this, MyGroupTodo.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        else if (id == R.id.nav_closegrouptask) {
+            Intent intent = new Intent(Dashboard.this, GroupCloseTask.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }

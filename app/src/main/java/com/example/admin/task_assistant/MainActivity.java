@@ -10,9 +10,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -20,8 +24,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    String name,mobile,email,tag,Admin,usertyp,txtadmin;
-    SharedPreferences pref;
+    String name,mobile,email,tag,Admin,usertyp,txtadmin,mImageUri;
+    SharedPreferences pref,prefm;
+    ImageView image1;
 
     TextView t1,t2;
 
@@ -40,6 +45,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
+
+        prefm =getApplication().getSharedPreferences("Picture", MODE_PRIVATE);
+        mImageUri = prefm.getString("Image", "");
 
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
         tag = pref.getString("usertyp", "");
@@ -78,6 +86,14 @@ public class MainActivity extends AppCompatActivity
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_add_contact).setVisible(true);
 
+        }
+
+
+        if (!TextUtils.isEmpty(mImageUri))  {
+            Picasso.with(getApplicationContext()).load("https://orgone.solutions/task/"+mImageUri)
+                    .into(image1);
+        } else {
+            image1.setImageResource(R.drawable.profile_girl);
         }
 
     }

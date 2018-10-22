@@ -24,12 +24,12 @@
             android:title="My Task" />-->
         <item
             android:id="@+id/nav_mytodo"
-            android:icon="@drawable/todo"
+            android:icon="@drawable/mytodo"
             android:title="My Todo" />
 
         <item
             android:id="@+id/nav_mygrouptodo"
-            android:icon="@drawable/todo"
+            android:icon="@drawable/group_task"
             android:title="My Group Todo" />
         <item
             android:id="@+id/nav_assigntask"
@@ -38,12 +38,12 @@
 
         <item
             android:id="@+id/nav_closetask"
-            android:icon="@drawable/close"
+            android:icon="@drawable/done"
             android:title="Close Task" />
 
         <item
             android:id="@+id/nav_closegrouptask"
-            android:icon="@drawable/close"
+            android:icon="@drawable/group_close"
             android:title="Group Close Task" />
 
 
@@ -67,7 +67,7 @@
 
         <item
             android:id="@+id/nav_mygroupTask"
-            android:icon="@drawable/grouptask"
+            android:icon="@drawable/group_todo"
             android:title="My Groups Task" />
 
         <item

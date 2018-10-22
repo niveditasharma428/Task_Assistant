@@ -1,6 +1,7 @@
 package com.example.admin.task_assistant;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -11,14 +12,13 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.provider.MediaStore;
+import android.os.StrictMode;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Base64;
-import android.util.Log;
-import android.view.View;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,13 +33,15 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import de.hdodenhof.circleimageview.CircleImageView;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -47,18 +49,23 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvMainEmail, tvMobile, tvMainName,tvCount;
     AlertDialog alertdialog;
-    ImageView img;
     int PICK_IMAGE_REQUEST = 111;
-    Bitmap bitmap;
     Button upload;
     ImageView imageView;
-    String name,email,mobile,count;
+    String name,email,mobile,count,usertyp;
     SharedPreferences.Editor editor;
     SharedPreferences pref1;
     SharedPreferences pref;
+    ProgressDialog progressDialog;
+
+    SharedPreferences prefm;
+    SharedPreferences.Editor editorm;
+
+    String cheqImageChange="";
 
     private static String LOGOUT_URL = "https://orgone.solutions/task/blogout.php";
-    private static String IMAGE_URL = "https://orgone.solutions/task/blogout.php";
+    private static String IMAGE_URL = "https://orgone.solutions/task/imgchk.php";
+    private static String PROFILE_URL = "https://orgone.solutions/task/profile.php";
 
     public void attachBaseContext(Context newBase){
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -75,6 +82,27 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 .build());
 
         setContentView(R.layout.activity_profile);
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_24dp);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(Profile.this, Dashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+
+            }
+        });
+
 
         pref1 = getApplication().getSharedPreferences("Options_Admin", MODE_PRIVATE);
         pref=getApplication().getSharedPreferences("Options", MODE_PRIVATE);
@@ -109,65 +137,137 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         imageView.setOnClickListener(this);
 
-        name = pref.getString("name", "");
+       /* name = pref.getString("name", "");
         tvMainName.setText(name);
 
         email = pref.getString("email", "");
         tvMainEmail.setText(email);
-
+*/
         mobile =pref.getString("mobile", "");
         tvMobile.setText(mobile);
 
         count =pref.getString("count", "");
         tvCount.setText(count);
 
+        usertyp = pref.getString("usertyp", "");
+
+
+        /* prefm =getSharedPreferences("Picture", MODE_PRIVATE);
+         String mImageUri = prefm.getString("Image", "");
+         System.out.println("Image1:-"+mImageUri);
+
+        if (!TextUtils.isEmpty(mImageUri)) {
+            Picasso.with(getApplicationContext()).load("https://orgone.solutions/task/"+mImageUri)
+                    .fit()
+                    .into(imageView);
+        } else {
+            imageView.setImageResource(R.drawable.profile_girl);
+        }
+
+*/
+
+        progressDialog = new ProgressDialog(Profile.this);
+        progressDialog.setMessage("Loading, please wait...");
+        progressDialog.show();
+        int i = 0;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, PROFILE_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(login.this, response, Toast.LENGTH_SHORT).show();
+                try {
+                    progressDialog.dismiss();
+                    JSONArray jsonObj = new JSONArray(response);
+                    final int numberOfItemsInResp = jsonObj.length();
+                    for (int i = 0; i < numberOfItemsInResp; i++) {
+                        JSONObject jsonObject = (JSONObject) jsonObj.get(i);
+
+                        String name = jsonObject.getString("name");
+                        tvMainName.setText(name);
+
+                        String email = jsonObject.getString("email");
+                        tvMainEmail.setText(email);
+
+                        String mobile1 = jsonObject.getString("mobile");
+                        tvMobile.setText(mobile1);
+
+                        String img = jsonObject.getString("USER_PHOTO");
+
+                        if(jsonObject.getString("USER_PHOTO").equals("null"))
+                        {
+                            imageView.setImageResource(R.drawable.pro1);
+                        }
+                        else {
+                            Picasso.with(getApplicationContext()).load(jsonObject.getString("USER_PHOTO"))
+                                    .fit()
+                                    .into(imageView);
+                        }
+
+
+                        prefm =getSharedPreferences("Picture", MODE_PRIVATE);
+                        editorm = prefm.edit();
+                        editorm.putString("Image", img);
+                        editorm.commit();
+
+
+
+                    }
+
+                } catch (JSONException e) {
+                    Toast.makeText(Profile.this, response, Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
+                        Toast.makeText(Profile.this, error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("mobile", mobile);
+                params.put("usertyp", usertyp);
+
+
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(Profile.this);
+        requestQueue.add(stringRequest);
+
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ProgressDialog progressDialog = new ProgressDialog(Profile.this);
-                progressDialog.setMessage("Uploading, please wait...");
-                progressDialog.show();
 
+                upload();
+                // final ProgressDialog progressDialog = new ProgressDialog(Profile.this);
+                //  progressDialog.setMessage("Uploading, please wait...");
+                //  progressDialog.show();
                 //converting image to base64 string
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+               /* ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] imageBytes = baos.toByteArray();
                 final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+*/
+                //     System.out.println("Image:-"+imageString);
 
                 //sending image to server
-                StringRequest request = new StringRequest(Request.Method.POST, IMAGE_URL, new Response.Listener<String>(){
-                    @Override
-                    public void onResponse(String s) {
-                        progressDialog.dismiss();
-                        if(s.equals("true")){
-                            Toast.makeText(Profile.this, "Image Uploaded Successful", Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            Toast.makeText(Profile.this, "Some error occurred!", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                },new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        
-                        Toast.makeText(Profile.this, "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();;
-                    }
-                }) {
-                    //adding parameters to send
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> parameters = new HashMap<String, String>();
-                        parameters.put("image", imageString);
-                        return parameters;
-                    }
-                };
 
-                RequestQueue rQueue = Volley.newRequestQueue(Profile.this);
-                rQueue.add(request);
             }
-        });
 
+        });
 
     }
 
@@ -201,16 +301,92 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri filePath = data.getData();
 
-            try {
-                //getting image from gallery
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+            if (resultCode == Activity.RESULT_OK) {
+                System.out.println("Divyacam6");
+                if (requestCode == PICK_IMAGE_REQUEST) {
 
-                //Setting image to ImageView
-                imageView.setImageBitmap(bitmap);
-            } catch (Exception e) {
-                e.printStackTrace();
+                    System.out.println("Divyacam7");
+
+                    // Get the User Selected Image as Bitmap from the static method of ImagePicker class
+                    Bitmap bitmap = ImagePicker.getImageFromResult(Profile.this, resultCode, data);
+
+                    System.out.println("Divyacam8");
+
+                    imageView.setImageBitmap(bitmap);
+                    // Upload the Bitmap to ImageView
+                    //    user_photo.setImageBitmap(bitmap);
+                    System.out.println("Divyacam9");
+                    // Get the converted Bitmap as Base64ImageString from the static method of Helper class
+                    cheqImageChange = Utilities.getBase64ImageStringFromBitmap(bitmap);
+
+                    System.out.println("Divyacam10:-" + cheqImageChange);
+                }
             }
+
         }
+    }
+
+    private void upload(){
+
+        RequestQueue requestQueue = new Volley().newRequestQueue(getApplicationContext());
+        StringRequest postRequest = new StringRequest(Request.Method.POST, IMAGE_URL, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    if (jsonObject.getInt("success") == 1) {
+
+
+                        Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+
+                        JSONObject jsonObjectInfo = jsonObject.getJSONObject("USER_IMAGE");
+
+                        String Upload_Image = jsonObjectInfo.getString("USER_PHOTO");
+
+                        System.out.println("Upload:-"+Upload_Image);
+
+
+                       // Picasso.with(getApplicationContext()).load("https://orgone.solutions/task/"+Upload_Image)
+                        Picasso.with(getApplicationContext()).load(Upload_Image)
+                                .into(imageView);
+
+
+
+
+
+                    }
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        })
+        {
+            protected Map<String, String> getParams() {
+                Map<String, String> param = new HashMap<String, String>();
+                param.put("cheqImageChange", cheqImageChange);
+                param.put("mobile", mobile);
+                param.put("usertyp", usertyp);
+
+
+
+                return param;
+            }
+
+        };
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        postRequest.setRetryPolicy(policy);
+        requestQueue.add(postRequest);
+
     }
 
     private void logout() {
@@ -319,9 +495,30 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
 
-        imageSelect();
+       // imageSelect();
+        pickImage();
+    }
+
+    private void pickImage() {
+
+        if (Build.VERSION.SDK_INT <= 24) {
+            // Intent with Image Picker Apps from the static method of ImagePicker class
+            Intent chooseImageIntent = ImagePicker.getImagePickerIntent(getApplicationContext());
+
+            // Start Activity with Image Picker Intent
+            startActivityForResult(chooseImageIntent, PICK_IMAGE_REQUEST);
+            System.out.println("Divyacam4");
+        } else {
+            Intent chooseImageIntent = ImagePicker.getImagePickerIntent(getApplicationContext());
+
+            // Start Activity with Image Picker Intent
+            startActivityForResult(chooseImageIntent, PICK_IMAGE_REQUEST);
+            System.out.println("Divyacam4");
+        }
+
     }
 }
