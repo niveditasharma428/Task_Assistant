@@ -19,10 +19,12 @@ import com.example.admin.task_assistant.Network.APIClient;
 import com.example.admin.task_assistant.R;
 import com.example.admin.task_assistant.model.ContactDetails;
 import com.example.admin.task_assistant.model.GroupDetails;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,6 +75,25 @@ public class GroupAddUserAdapter extends RecyclerView.Adapter<GroupAddUserAdapte
 
         holder.txt_mobileno.setText(contactDetails.getMobile_no());
         holder.txt_name.setText(contactDetails.getName());
+
+        System.out.println("Contact:"+contactDetails.getUSER_PHOTO());
+
+
+
+
+        if(contactDetails.getUSER_PHOTO().equals(""))
+        {
+            holder.image.setImageResource(R.drawable.pro1);
+        }
+        else {
+
+            //System.out.println("Contact:"+contactDetails.getUSER_PHOTO());
+
+           // Picasso.with((context)).load(contactDetails.getUSER_PHOTO())
+            Picasso.with((context)).load("https://orgone.solutions/task/image/"+contactDetails.getUSER_PHOTO())
+                    .into(holder.image);
+        }
+
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,6 +190,7 @@ public class GroupAddUserAdapter extends RecyclerView.Adapter<GroupAddUserAdapte
         TextView txt_name, txt_mobileno;
         CheckBox checkBox;
         Button btn_add;
+        CircleImageView image;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -176,6 +198,7 @@ public class GroupAddUserAdapter extends RecyclerView.Adapter<GroupAddUserAdapte
             txt_name = (TextView) itemView.findViewById(R.id.textViewName);
             txt_mobileno = (TextView) itemView.findViewById(R.id.textViewContact);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkbox);
+            image=(CircleImageView)itemView.findViewById(R.id.image);
 
         }
     }

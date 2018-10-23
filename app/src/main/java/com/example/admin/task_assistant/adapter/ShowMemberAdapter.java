@@ -18,6 +18,8 @@ import com.example.admin.task_assistant.model.MemberPD;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ShowMemberAdapter extends RecyclerView.Adapter<ShowMemberAdapter.MyViewHolder> {
     Context context;
     List<MemberPD> memberslist;
@@ -51,18 +53,21 @@ public class ShowMemberAdapter extends RecyclerView.Adapter<ShowMemberAdapter.My
 
         final MemberPD memberDetails = memberslist.get(position);
 
+        System.out.println("DivyaMemberNAME:-"+memberDetails.getName());
+
         holder.iv_delete.setVisibility(View.GONE);
         holder.txt_groupName.setText(groupName);
         holder.txt_name.setText(memberDetails.getName().substring(0, memberDetails.getName().indexOf('-')));
         holder.txt_mob.setText(memberDetails.getName().replaceAll(".+- ", ""));
+
         System.out.println("GroupCreatedBy:-"+groupcreatedby);
+
         if(groupcreatedby.equalsIgnoreCase(memberDetails.getName().substring(0, memberDetails.getName().indexOf('-')).trim()))
         {
             holder.textadminName.setVisibility(View.VISIBLE);
         }
         else
         {
-
             holder.textadminName.setVisibility(View.GONE);
         }
 
@@ -82,6 +87,7 @@ public class ShowMemberAdapter extends RecyclerView.Adapter<ShowMemberAdapter.My
                         i.putExtra("groupname", groupName);
                         i.putExtra("memberlis", groupMember);
                         i.putExtra("groupcreatedby", groupcreatedby);
+
                         context.startActivity(i);
                     }
 
@@ -101,6 +107,7 @@ public class ShowMemberAdapter extends RecyclerView.Adapter<ShowMemberAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txt_groupName, txt_name, txt_mob,textadminName;
         LinearLayout linearLayout;
+        CircleImageView img;
         ImageView iv_delete;
 
 
@@ -111,6 +118,7 @@ public class ShowMemberAdapter extends RecyclerView.Adapter<ShowMemberAdapter.My
             textadminName = (TextView) itemView.findViewById(R.id.textadminName);
             txt_groupName = (TextView) itemView.findViewById(R.id.textViewDate);
             txt_mob = (TextView) itemView.findViewById(R.id.textViewmob);
+            img=(CircleImageView)itemView.findViewById(R.id.image) ;
             linearLayout = (LinearLayout) itemView.findViewById(R.id.layout1);
             iv_delete = (ImageView) itemView.findViewById(R.id.iv_delete);
 

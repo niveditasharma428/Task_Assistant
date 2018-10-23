@@ -65,7 +65,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
             in_process_task=(TextView)itemView.findViewById(R.id.in_process);
             done_task=(TextView)itemView.findViewById(R.id.done);
 
-            imageView= (ImageView) itemView.findViewById(R.id.imageViewt);
+           // imageView= (ImageView) itemView.findViewById(R.id.imageViewt);
 
 
             rootLayout= (LinearLayout) itemView.findViewById(R.id.rootLayout);

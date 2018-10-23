@@ -1,6 +1,5 @@
 package com.example.admin.task_assistant.fragment;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,7 +23,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class FragAddGroupUser extends Fragment {
 
@@ -64,7 +62,7 @@ public class FragAddGroupUser extends Fragment {
             public void onResponse(Call<List<ContactDetails>> call, Response<List<ContactDetails>> response) {
 
                 ArrayList addContacts = new ArrayList<>();
-                String mobileno, name, tag;
+                String mobileno, name, tag,image;
 
                 if (response.isSuccessful()) {
                     List<ContactDetails> contactDetailsList = response.body();
@@ -73,9 +71,10 @@ public class FragAddGroupUser extends Fragment {
                         mobileno = contactDetailsList.get(i).getMobile_no();
                         name = contactDetailsList.get(i).getName();
                         tag = contactDetailsList.get(i).getTag();
+                        image=contactDetailsList.get(i).getUSER_PHOTO();
 
-                        addContacts.add(new ContactDetails(mobileno, name, tag));
-                        System.out.println("TaskAssistant:-" + mobileno + name + tag);
+                        addContacts.add(new ContactDetails(mobileno, name, tag,image));
+                        System.out.println("TaskAssistant:-" + mobileno + name + tag +image);
                     }
 
                 }

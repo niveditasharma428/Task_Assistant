@@ -93,7 +93,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
 
-        if(mDataOBJ.getImage().equals("null"))
+        if(mDataOBJ.getImage().equals(""))
         {
             holder.img.setImageResource(R.drawable.pro1);
         }
@@ -101,8 +101,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             System.out.println("Contact:"+mDataOBJ.getImage());
 
-            Picasso.with((context))
-                    .load(mDataOBJ.getImage())
+
+            // Picasso.with((context)).load(mDataOBJ.getImage())
+
+            Picasso.with((context)).load("https://orgone.solutions/task/image/"+mDataOBJ.getImage())
                     .into(holder.img);
         }
 

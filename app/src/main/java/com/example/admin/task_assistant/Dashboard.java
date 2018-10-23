@@ -93,6 +93,7 @@ public class Dashboard extends AppCompatActivity
         View view= navigationView.getHeaderView(0);
         name1 = (TextView)view.findViewById(R.id.name);
         email1 = (TextView)view.findViewById(R.id.mailid);
+        image1= (ImageView) findViewById(R.id.imageView);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
@@ -141,9 +142,8 @@ public class Dashboard extends AppCompatActivity
 
         }
 
-/*
 
-        prefm =getSharedPreferences("Picture", 0);
+       /* prefm =getSharedPreferences("Picture", 0);
         mImageUri = prefm.getString("Image", "");
 
         System.out.println("Response:-"+mImageUri);
@@ -153,8 +153,8 @@ public class Dashboard extends AppCompatActivity
                     .into(image1);
         } else {
             image1.setImageResource(R.drawable.profile_girl);
-        }
-*/
+        }*/
+
 
     }
 

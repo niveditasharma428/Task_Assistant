@@ -158,7 +158,7 @@
             android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
-            <RelativeLayout
+           <!-- <RelativeLayout
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                     android:layout_marginTop="@dimen/margin_between_text"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/user2"/>
-            </RelativeLayout>
+            </RelativeLayout>-->
 
             <RelativeLayout
 
@@ -207,6 +207,16 @@
 
 
             </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/title">
+
+
+            </RelativeLayout>
+
 
 
         </LinearLayout>

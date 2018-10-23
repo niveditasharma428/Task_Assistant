@@ -18,10 +18,16 @@ public class ContactDetails {
     @Expose
     String tag;
 
-    public ContactDetails(String mobile_no, String name, String tag) {
+    @SerializedName("USER_PHOTO")
+    @Expose
+    String USER_PHOTO;
+
+
+    public ContactDetails(String mobile_no, String name, String tag, String USER_PHOTO) {
         this.mobile_no = mobile_no;
         this.name = name;
         this.tag = tag;
+        this.USER_PHOTO = USER_PHOTO;
     }
 
     public String getMobile_no() {
@@ -46,5 +52,13 @@ public class ContactDetails {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getUSER_PHOTO() {
+        return USER_PHOTO;
+    }
+
+    public void setUSER_PHOTO(String USER_PHOTO) {
+        this.USER_PHOTO = USER_PHOTO;
     }
 }

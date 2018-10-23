@@ -137,7 +137,7 @@
                             android:layout_marginRight="10dp"
                             android:src="@drawable/user2"/>-->
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                      <!--  <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/imageView"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
@@ -148,7 +148,7 @@
                             android:src="@drawable/profile_girl"
                             app:civ_border_width="2dp"
                             app:civ_border_color="@color/colorPrimaryDark"
-                            />
+                            />-->
 
                     </RelativeLayout>
 
@@ -167,7 +167,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginBottom="10dp"
                             android:layout_marginTop="@dimen/margin_between_text"
                             android:fontFamily="sans-serif-light"
                             android:text="Name   "
@@ -208,7 +208,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginBottom="10dp"
                             android:layout_marginTop="@dimen/margin_between_text"
                             android:fontFamily="sans-serif-light"
                             android:text="Priority "
@@ -225,7 +225,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="10dp"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginBottom="10dp"
                             android:layout_marginTop="@dimen/margin_between_text"
                             android:fontFamily="sans-serif-light"
                             android:text="Priority "

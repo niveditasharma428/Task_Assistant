@@ -193,12 +193,13 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
                         String img = jsonObject.getString("USER_PHOTO");
 
-                        if(jsonObject.getString("USER_PHOTO").equals("null"))
+                        if(jsonObject.getString("USER_PHOTO").equals(""))
                         {
                             imageView.setImageResource(R.drawable.pro1);
                         }
                         else {
-                            Picasso.with(getApplicationContext()).load(jsonObject.getString("USER_PHOTO"))
+
+                            Picasso.with(getApplicationContext()).load("https://orgone.solutions/task/image/"+jsonObject.getString("USER_PHOTO"))
                                     .fit()
                                     .into(imageView);
                         }
@@ -348,9 +349,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                         System.out.println("Upload:-"+Upload_Image);
 
 
-                       // Picasso.with(getApplicationContext()).load("https://orgone.solutions/task/"+Upload_Image)
-                        Picasso.with(getApplicationContext()).load(Upload_Image)
+                       Picasso.with(getApplicationContext()).load("https://orgone.solutions/task/image/"+Upload_Image)
+                       // Picasso.with(getApplicationContext()).load(Upload_Image)
                                 .into(imageView);
+
+                        prefm =getSharedPreferences("Picture", MODE_PRIVATE);
+                        editorm = prefm.edit();
+                        editorm.putString("Image", Upload_Image);
+                        editorm.commit();
+
 
 
 
