@@ -71,7 +71,7 @@ public class ShowMemberAdapter extends RecyclerView.Adapter<ShowMemberAdapter.My
             holder.textadminName.setVisibility(View.GONE);
         }
 
-        if (usertyp.equalsIgnoreCase("txtadmin")) {
+       /* if (usertyp.equalsIgnoreCase("txtadmin")) {*/
 
             holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,7 +94,7 @@ public class ShowMemberAdapter extends RecyclerView.Adapter<ShowMemberAdapter.My
 
                 }
             });
-        }
+        //}
 
     }
 

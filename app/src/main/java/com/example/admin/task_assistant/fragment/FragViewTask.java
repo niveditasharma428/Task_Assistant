@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.task_assistant.Network.APIClient;
@@ -34,6 +35,7 @@ public class FragViewTask extends Fragment {
     GroupViewTaskAdapter groupViewTaskAdapter;
     ProgressDialog progressDialog;
     TextView txtnorec;
+    ImageView no_record;
 
     @Nullable
     @Override
@@ -41,6 +43,7 @@ public class FragViewTask extends Fragment {
         View rootView = inflater.inflate(R.layout.fragviewtask, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view3);
         txtnorec = (TextView) rootView.findViewById(R.id.txtnorec);
+        no_record=(ImageView) rootView.findViewById(R.id.no_record);
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading, please wait...");
         progressDialog.show();
@@ -72,8 +75,11 @@ public class FragViewTask extends Fragment {
                         System.out.println("DivyaGroupTaskDetailsNo:-" + groupTaskDetailsList.size());
                         if (groupTaskDetailsList.size() == 0) {
                             txtnorec.setVisibility(View.VISIBLE);
+                            no_record.setVisibility(View.VISIBLE);
+
                         } else {
                             txtnorec.setVisibility(View.GONE);
+                            no_record.setVisibility(View.GONE);
                         }
                         for (int i = 0; i < groupTaskDetailsList.size(); i++) {
                             String TASK_ID = groupTaskDetailsList.get(i).getTASK_ID().toString();

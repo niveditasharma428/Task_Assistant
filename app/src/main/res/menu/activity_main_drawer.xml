@@ -67,7 +67,7 @@
 
         <item
             android:id="@+id/nav_mygroupTask"
-            android:icon="@drawable/group_todo"
+            android:icon="@drawable/my_group_task"
             android:title="My Groups Task" />
 
         <item

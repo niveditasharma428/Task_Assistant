@@ -20,7 +20,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    sleep(3000);
+                    sleep(5000);
                     SharedPreferences shared = getSharedPreferences("Options", Context.MODE_PRIVATE);
                     String val = shared.getString("mobile", "");
                     if (val.length() == 0) {

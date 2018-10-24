@@ -2,6 +2,7 @@ package com.example.admin.task_assistant;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -20,7 +21,8 @@ public class GroupTaskAssistant extends AppCompatActivity {
     ViewPager viewPager;
     GroupTaskAdapter groupTaskAdapter;
     ImageView iv_back;
-    String al, groupname,groupcreatedby;
+    SharedPreferences pref;
+    String al, groupname,groupcreatedby,usertyp;
 
     public void attachBaseContext(Context newBase){
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -58,8 +60,34 @@ public class GroupTaskAssistant extends AppCompatActivity {
                 getResources().getColor(R.color.white)
         );
 
+        pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
+        usertyp = pref.getString("usertyp", "");
 
-        iv_back.setOnClickListener(new View.OnClickListener() {
+
+        if (!usertyp.equalsIgnoreCase("txtadmin")) {
+
+
+            iv_back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), MyGroups.class);
+                    startActivity(i);
+
+                }
+            });
+        }
+        else {
+            iv_back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), Group.class);
+                    startActivity(i);
+
+                }
+            });
+        }
+
+        /* iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), Group.class);
@@ -69,7 +97,7 @@ public class GroupTaskAssistant extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+*/
 
     }
 

@@ -34,7 +34,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.admin.task_assistant.Network.APIClient;
 import com.example.admin.task_assistant.model.MyTodo;
 import com.example.admin.task_assistant.model.MyTodoDetails;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,6 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -59,6 +62,7 @@ public class MyTodoTask extends AppCompatActivity
     RecyclerViewAdapter4 recyclerViewadapter4;
     RecyclerViewAdapter5 recyclerViewadapter5;
     TextView name1, email1, t3;
+    CircleImageView profile;
     String mobile, TASK_ID, name, email, CREATED_BY, Seen, usertyp;
 
     SharedPreferences pref;
@@ -70,6 +74,8 @@ public class MyTodoTask extends AppCompatActivity
 
     private static String MY_TODO_TASK_URL = "https://orgone.solutions/task/mytask_count.php";
     private static String UPDATE_STATUS_URL = "https://orgone.solutions/task/tasks_seen.php";
+    private static String PROFILE_URL = "https://orgone.solutions/task/profile.php";
+
 
 
     public void attachBaseContext(Context newBase) {
@@ -101,6 +107,7 @@ public class MyTodoTask extends AppCompatActivity
         View view = navigationView.getHeaderView(0);
         name1 = (TextView) view.findViewById(R.id.name);
         email1 = (TextView) view.findViewById(R.id.mailid);
+        profile=(CircleImageView)view.findViewById(R.id.imageView);
         t3 = (TextView) findViewById(R.id.count);
 
       /*  Bundle bundle=getIntent().getExtras();
@@ -113,8 +120,8 @@ public class MyTodoTask extends AppCompatActivity
         name = pref.getString("name", "");
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
-        name1.setText(name);
-        email1.setText(email);
+       // name1.setText(name);
+      //  email1.setText(email);
 
         ListOfcontact4 = new ArrayList<>();
         recyclerView1 = (RecyclerView) findViewById(R.id.my_recycler_view4);
@@ -198,6 +205,79 @@ public class MyTodoTask extends AppCompatActivity
             Toast.makeText(MyTodoTask.this, "error", Toast.LENGTH_LONG).show();
 
         }
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, PROFILE_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(login.this, response, Toast.LENGTH_SHORT).show();
+                try {
+                    // progressDialog.dismiss();
+                    JSONArray jsonObj = new JSONArray(response);
+                    final int numberOfItemsInResp = jsonObj.length();
+                    for (int i = 0; i < numberOfItemsInResp; i++) {
+                        JSONObject jsonObject = (JSONObject) jsonObj.get(i);
+
+                        String name = jsonObject.getString("name");
+                        System.out.println("name:-"+name);
+                        name1.setText(name);
+
+                        String email = jsonObject.getString("email");
+                        System.out.println("email:-"+email);
+                        email1.setText(email);
+
+
+                        String img = jsonObject.getString("USER_PHOTO");
+                        // System.out.println("profile:-"+img);
+
+                        if(jsonObject.getString("USER_PHOTO").equals(""))
+                        {
+                            profile.setImageResource(R.drawable.pro1);
+                        }
+                        else {
+
+                            System.out.println("profile1:-"+img);
+                            Picasso.with(getApplicationContext()).load("https://orgone.solutions/task/image/"+img)
+                                    .into(profile);
+                        }
+
+
+
+
+                    }
+
+                } catch (JSONException e) {
+                    Toast.makeText(MyTodoTask.this, response, Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+
+                        Toast.makeText(MyTodoTask.this, error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("mobile", mobile);
+                params.put("usertyp", usertyp);
+
+
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(MyTodoTask.this);
+        requestQueue.add(stringRequest);
+
 
     }
 

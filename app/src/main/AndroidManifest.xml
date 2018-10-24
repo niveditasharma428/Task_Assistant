@@ -69,7 +69,6 @@
             android:name=".Admin"
             android:theme="@style/AppTheme2" />
         <!-- android:parentActivityName=".Admin_User" -->
-        <activity android:name=".UserAct" />
         <activity android:name=".AdminLogin" />
         <activity android:name=".Admin_User" />
         <activity android:name=".GetStart" />

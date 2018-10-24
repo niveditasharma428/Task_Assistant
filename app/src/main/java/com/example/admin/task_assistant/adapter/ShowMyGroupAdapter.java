@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.task_assistant.GroupMember;
 import com.example.admin.task_assistant.Network.APIClient;
@@ -67,7 +68,10 @@ public class ShowMyGroupAdapter extends RecyclerView.Adapter<ShowMyGroupAdapter.
                         MyGroupMembers myGroupMembers = response.body();
                         if (myGroupMembers.getSuccess().equalsIgnoreCase("1")) {
                             myGroupMembersLists = myGroupMembers.getMyGroupMembersLists();
-                            String groupmembers = "";
+
+                            if (myGroupMembersLists.size() > 0)
+                            {
+                                String groupmembers = "";
                             for (int i = 0; i < myGroupMembersLists.size(); i++) {
                                 String name = myGroupMembersLists.get(i).getGROUP_MEMBER_NAME();
                                 String mobile = myGroupMembersLists.get(i).getGROUP_MEMBER_MOBILE();
@@ -81,6 +85,11 @@ public class ShowMyGroupAdapter extends RecyclerView.Adapter<ShowMyGroupAdapter.
                             i.putExtra("groupmembers", groupmembers);
                             i.putExtra("groupcreatedby", groupMembers.getCREATED_BY());
                             context.startActivity(i);
+                        }
+                        else
+                            {
+                                Toast.makeText(context,"Something Went Wrong",Toast.LENGTH_SHORT).show();
+                            }
 
                         }
                     }

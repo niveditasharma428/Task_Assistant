@@ -211,7 +211,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                         editorm.commit();
 
 
-
                     }
 
                 } catch (JSONException e) {
@@ -353,10 +352,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                        // Picasso.with(getApplicationContext()).load(Upload_Image)
                                 .into(imageView);
 
-                        prefm =getSharedPreferences("Picture", MODE_PRIVATE);
-                        editorm = prefm.edit();
-                        editorm.putString("Image", Upload_Image);
-                        editorm.commit();
+
 
 
 

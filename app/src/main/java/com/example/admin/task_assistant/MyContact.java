@@ -17,16 +17,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,8 +46,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MyContact extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private Toolbar toolbar;
 
+    private Toolbar toolbar;
     List<Contact> ListOfcontact = new ArrayList<>();
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManagerOfrecyclerView;
@@ -53,6 +56,7 @@ public class MyContact extends AppCompatActivity
     TextView name1,email1;
     CircleImageView circleImageView;
     LinearLayout layout1;
+    CircleImageView profile;
     String mobile,TASK_ID,name,email,usertyp;
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -63,6 +67,8 @@ public class MyContact extends AppCompatActivity
     SharedPreferences.Editor editorm;
 
     private static String MY_CONTACT_URL = "https://orgone.solutions/task/userdata.php";
+    private static String PROFILE_URL = "https://orgone.solutions/task/profile.php";
+
 
     public void attachBaseContext(Context newBase){
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -96,6 +102,7 @@ public class MyContact extends AppCompatActivity
         View view= navigationView.getHeaderView(0);
         name1 = (TextView)view.findViewById(R.id.name);
         email1 = (TextView)view.findViewById(R.id.mailid);
+        profile= (CircleImageView)view. findViewById(R.id.imageView);
         circleImageView= (CircleImageView) findViewById(R.id.image);
         swipeRefreshLayout= (SwipeRefreshLayout) findViewById(R.id.refresh);
 
@@ -115,8 +122,8 @@ public class MyContact extends AppCompatActivity
         name = pref.getString("name", "");
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
-        name1.setText(name);
-        email1.setText(email);
+       // name1.setText(name);
+       // email1.setText(email);
 
         ListOfcontact = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view2);
@@ -164,7 +171,81 @@ public class MyContact extends AppCompatActivity
         }
         contactData();
 
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, PROFILE_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(login.this, response, Toast.LENGTH_SHORT).show();
+                try {
+                   // progressDialog.dismiss();
+                    JSONArray jsonObj = new JSONArray(response);
+                    final int numberOfItemsInResp = jsonObj.length();
+                    for (int i = 0; i < numberOfItemsInResp; i++) {
+                        JSONObject jsonObject = (JSONObject) jsonObj.get(i);
+
+                        String name = jsonObject.getString("name");
+                        System.out.println("name:-"+name);
+                        name1.setText(name);
+
+                        String email = jsonObject.getString("email");
+                        System.out.println("email:-"+email);
+                        email1.setText(email);
+
+
+                        String img = jsonObject.getString("USER_PHOTO");
+                       // System.out.println("profile:-"+img);
+
+                        if(jsonObject.getString("USER_PHOTO").equals(""))
+                        {
+                            profile.setImageResource(R.drawable.pro1);
+                        }
+                        else {
+
+                            System.out.println("profile1:-"+img);
+                            Picasso.with(getApplicationContext()).load("https://orgone.solutions/task/image/"+img)
+                                    .into(profile);
+                        }
+
+
+
+
+                    }
+
+                } catch (JSONException e) {
+                    Toast.makeText(MyContact.this, response, Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+
+                        Toast.makeText(MyContact.this, error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("mobile", mobile);
+                params.put("usertyp", usertyp);
+
+
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(MyContact.this);
+        requestQueue.add(stringRequest);
+
     }
+
 
 
     //ProgressDialog progressDialog;

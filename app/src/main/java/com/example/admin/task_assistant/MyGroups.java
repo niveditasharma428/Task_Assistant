@@ -15,17 +15,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.admin.task_assistant.Network.APIClient;
 import com.example.admin.task_assistant.adapter.ShowMyGroupAdapter;
 import com.example.admin.task_assistant.model.MyGroupMemberDetails;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,11 +61,16 @@ public class MyGroups extends AppCompatActivity
 
 
     TextView name1, email1, t3;
+    CircleImageView profile;
     String mobile, TASK_ID, name, email, CREATED_BY, usertyp;
 
     TextView txtnorec,txt1,txt2;
+    ImageView no_record;
 
     LinearLayout layout1;
+
+    private static String PROFILE_URL = "https://orgone.solutions/task/profile.php";
+
 
     public void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -82,6 +102,8 @@ public class MyGroups extends AppCompatActivity
         View view = navigationView.getHeaderView(0);
         name1 = (TextView) view.findViewById(R.id.name);
         email1 = (TextView) view.findViewById(R.id.mailid);
+        profile= (CircleImageView)view. findViewById(R.id.imageView);
+
         t3 = (TextView) findViewById(R.id.count);
 
         recyclerView = (RecyclerView)findViewById(R.id.recshowgroup);
@@ -94,8 +116,8 @@ public class MyGroups extends AppCompatActivity
         name = pref.getString("name", "");
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
-        name1.setText(name);
-        email1.setText(email);
+       // name1.setText(name);
+       // email1.setText(email);
 
         pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
         usertyp = pref.getString("usertyp", "");
@@ -124,8 +146,8 @@ public class MyGroups extends AppCompatActivity
             nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(false);
             nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(false);
 
-
         }
+
         else
         {
             Toast.makeText(MyGroups.this, "error", Toast.LENGTH_LONG).show();
@@ -166,6 +188,78 @@ public class MyGroups extends AppCompatActivity
             }
         });
 
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, PROFILE_URL, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(login.this, response, Toast.LENGTH_SHORT).show();
+                try {
+                    // progressDialog.dismiss();
+                    JSONArray jsonObj = new JSONArray(response);
+                    final int numberOfItemsInResp = jsonObj.length();
+                    for (int i = 0; i < numberOfItemsInResp; i++) {
+                        JSONObject jsonObject = (JSONObject) jsonObj.get(i);
+
+                        String name = jsonObject.getString("name");
+                        System.out.println("name:-"+name);
+                        name1.setText(name);
+
+                        String email = jsonObject.getString("email");
+                        System.out.println("email:-"+email);
+                        email1.setText(email);
+
+
+                        String img = jsonObject.getString("USER_PHOTO");
+                        // System.out.println("profile:-"+img);
+
+                        if(jsonObject.getString("USER_PHOTO").equals(""))
+                        {
+                            profile.setImageResource(R.drawable.pro1);
+                        }
+                        else {
+
+                            System.out.println("profile1:-"+img);
+                            Picasso.with(getApplicationContext()).load("https://orgone.solutions/task/image/"+img)
+                                    .into(profile);
+                        }
+
+
+
+
+                    }
+
+                } catch (JSONException e) {
+                    Toast.makeText(MyGroups.this, response, Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+        },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+
+                        Toast.makeText(MyGroups.this, error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("mobile", mobile);
+                params.put("usertyp", usertyp);
+
+
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(MyGroups.this);
+        requestQueue.add(stringRequest);
 
 
     }

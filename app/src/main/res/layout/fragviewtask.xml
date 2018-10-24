@@ -61,8 +61,7 @@
             android:id="@+id/txtmembername"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_spinner_background"
-            />
+            android:background="@drawable/custom_spinner_background"/>
 
     </LinearLayout>
 
@@ -81,7 +80,15 @@
         android:text="No Record Found"
         android:layout_marginTop="100dp"
         android:textSize="15dp"
-        android:visibility="gone"
-        />
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/no_record"
+        android:layout_gravity="center"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/notask"
+        android:visibility="gone"/>
 
 </LinearLayout>
