@@ -31,7 +31,6 @@ android:paddingBottom="@dimen/margin_medium">
         app:cardPreventCornerOverlap="false">
 
 
-
         <ImageView
             android:id="@+id/delete"
             android:layout_width="20dp"
@@ -40,6 +39,7 @@ android:paddingBottom="@dimen/margin_medium">
             android:layout_marginRight="50dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/delete1" />
+
         <ImageView
             android:id="@+id/reassign"
             android:layout_width="20dp"
@@ -48,7 +48,6 @@ android:paddingBottom="@dimen/margin_medium">
             android:layout_marginRight="20dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/reply" />
-
 
 
         <LinearLayout android:layout_width="match_parent"
@@ -171,7 +170,6 @@ android:paddingBottom="@dimen/margin_medium">
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@+id/title"
                         android:layout_weight="1">
-
 
                         <TextView
                             android:id="@+id/assign"

@@ -133,9 +133,7 @@ public interface APIRequests {
     @POST("memb_for_adding.php")
     @FormUrlEncoded
     Call<Member> memb_for_adding(@Field("GROUP_NAME") String GROUP_NAME,
-                                 @Field("CREATED_BY") String CREATED_BY
-    );
-
+                                 @Field("CREATED_BY") String CREATED_BY);
 
     @POST("groupmembers_adding.php")
     @FormUrlEncoded

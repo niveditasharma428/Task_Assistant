@@ -57,7 +57,6 @@ public class FragViewTask extends Fragment {
         pref = getContext().getSharedPreferences("Options", getContext().MODE_PRIVATE);
         createdBy = pref.getString("name", "");
 
-
         System.out.println("GroupViewTask:-" + groupmember + "-" + groupname + "--" + createdBy);
 
         Call<GroupTask> showGroupTask = APIClient.getInstance().groupTaskAssignView(groupname, groupmember);
@@ -88,7 +87,9 @@ public class FragViewTask extends Fragment {
                             String TASK_PRIORITY = groupTaskDetailsList.get(i).getTASK_PRIORITY();
                             String TASK_STATUS = groupTaskDetailsList.get(i).getTASK_STATUS();
                             String TASK_GROUP = groupTaskDetailsList.get(i).getTASK_GROUP();
-                            String TASK_ASSIGN = groupTaskDetailsList.get(i).getTASK_ASSIGN();
+                            String assign = groupTaskDetailsList.get(i).getTASK_ASSIGN();
+                            String TASK_ASSIGN = assign.substring(0, assign.indexOf('-'));
+
                             al.add(new GroupTaskDetails(TASK_ID, TASK_DES, TASK_COMMENT, TASK_PRIORITY, TASK_STATUS, TASK_GROUP, TASK_ASSIGN));
 
                             System.out.println("DivyaAL:-" + TASK_ID + TASK_ASSIGN);
@@ -110,7 +111,6 @@ public class FragViewTask extends Fragment {
                 progressDialog.dismiss();
             }
         });
-
 
         return rootView;
     }

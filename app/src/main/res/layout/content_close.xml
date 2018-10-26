@@ -8,13 +8,10 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior"
 tools:context=".Close"
 tools:showIn="@layout/app_bar_close">
 
-
-
 <android.support.v7.widget.RecyclerView
     android:id="@+id/my_recycler_view4"
     android:scrollbars="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
-
 
 </LinearLayout>

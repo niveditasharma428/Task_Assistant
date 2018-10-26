@@ -103,7 +103,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
-
         pref1 = getApplication().getSharedPreferences("Options_Admin", MODE_PRIVATE);
         pref=getApplication().getSharedPreferences("Options", MODE_PRIVATE);
 
@@ -117,32 +116,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         Button logout = (Button) findViewById(R.id.buttonLogout);
        // img=(ImageView) findViewById(R.id.back_img);
 
-
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logout();
             }
         });
-/*        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Profile.this, Dashboard.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
-            }
-        });*/
 
         imageView.setOnClickListener(this);
 
-       /* name = pref.getString("name", "");
-        tvMainName.setText(name);
-
-        email = pref.getString("email", "");
-        tvMainEmail.setText(email);
-*/
         mobile =pref.getString("mobile", "");
         tvMobile.setText(mobile);
 
@@ -165,7 +147,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
 
 */
-
         progressDialog = new ProgressDialog(Profile.this);
         progressDialog.setMessage("Loading, please wait...");
         progressDialog.show();
@@ -204,19 +185,16 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                                     .into(imageView);
                         }
 
-
                         prefm =getSharedPreferences("Picture", MODE_PRIVATE);
                         editorm = prefm.edit();
                         editorm.putString("Image", img);
                         editorm.commit();
-
 
                     }
 
                 } catch (JSONException e) {
                     Toast.makeText(Profile.this, response, Toast.LENGTH_LONG).show();
                 }
-
 
             }
 
@@ -237,7 +215,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 params.put("mobile", mobile);
                 params.put("usertyp", usertyp);
 
-
                 return params;
             }
 
@@ -246,15 +223,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         RequestQueue requestQueue = Volley.newRequestQueue(Profile.this);
         requestQueue.add(stringRequest);
 
-
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 upload();
-                // final ProgressDialog progressDialog = new ProgressDialog(Profile.this);
-                //  progressDialog.setMessage("Uploading, please wait...");
-                //  progressDialog.show();
+
                 //converting image to base64 string
                /* ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -263,26 +237,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 */
                 //     System.out.println("Image:-"+imageString);
 
-                //sending image to server
-
             }
 
         });
 
     }
 
-    public void imageSelect() {
-        permissionsCheck();
-        Intent intent;
-        if (Build.VERSION.SDK_INT < 19) {
-            intent = new Intent(Intent.ACTION_GET_CONTENT);
-        } else {
-            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-        }
-        intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
 
     public void permissionsCheck() {
         if (ContextCompat.checkSelfPermission(this,
@@ -352,14 +312,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                        // Picasso.with(getApplicationContext()).load(Upload_Image)
                                 .into(imageView);
 
-
-
-
-
-
-
-
                     }
+
                 }catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -378,8 +332,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 param.put("cheqImageChange", cheqImageChange);
                 param.put("mobile", mobile);
                 param.put("usertyp", usertyp);
-
-
 
                 return param;
             }
@@ -496,7 +448,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         startActivity(back);
         overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override

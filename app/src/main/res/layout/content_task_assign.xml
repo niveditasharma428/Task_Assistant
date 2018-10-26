@@ -19,7 +19,6 @@
         android:layout_margin="4dp"
         android:layout_height="wrap_content">
 
-        <!-- Text Label -->
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -91,14 +90,12 @@
             android:textSize="17sp"
             android:layout_marginBottom="5dp"/>
 
-        <!-- Spinner Element -->
         <Spinner
             android:id="@+id/spinner3"
             android:background="@drawable/custom_spinner_background"
             android:spinnerMode="dropdown"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

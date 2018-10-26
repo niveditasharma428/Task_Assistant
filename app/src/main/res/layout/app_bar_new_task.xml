@@ -8,10 +8,7 @@
     tools:context=".NewTask">
 
 
-
-
     <include layout="@layout/content_new_task" />
-
 
 
 </android.support.design.widget.CoordinatorLayout>

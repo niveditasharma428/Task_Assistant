@@ -22,6 +22,4 @@
 
     <include layout="@layout/content_group_close_task" />
 
-
-
 </android.support.design.widget.CoordinatorLayout>

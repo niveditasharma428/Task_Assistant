@@ -16,7 +16,6 @@ public class Discription extends AppCompatActivity {
 
     SharedPreferences pref;
 
-
     public void attachBaseContext(Context newBase){
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }

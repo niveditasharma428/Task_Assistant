@@ -35,11 +35,11 @@ public class Verify_Mobile extends AppCompatActivity implements View.OnClickList
     TextView mob,resend;
     String mobile;
 
-    private static String CONFIRM_URL = "https://orgone.solutions/task/checkotp.php";
-     private static String RESEND_URL = "https://orgone.solutions/task/resendotp.php";
-
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+
+    private static String CONFIRM_URL = "https://orgone.solutions/task/checkotp.php";
+    private static String RESEND_URL = "https://orgone.solutions/task/resendotp.php";
 
     public void attachBaseContext(Context newBase){
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -55,6 +55,7 @@ public class Verify_Mobile extends AppCompatActivity implements View.OnClickList
                 .build());
 
         setContentView(R.layout.activity_verify__mobile);
+
         buttonConfirm = (AppCompatButton) findViewById(R.id.buttonConfirm);
         editTextConfirmOtp = (EditText) findViewById(R.id.editTextOtp);
         mob=(TextView) findViewById(R.id.verify_mob);
@@ -87,8 +88,7 @@ public class Verify_Mobile extends AppCompatActivity implements View.OnClickList
         final String otp = editTextConfirmOtp.getText().toString().trim();
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest postRequest = new StringRequest(Request.Method.POST,CONFIRM_URL,
-                new Response.Listener<String>() {
+        StringRequest postRequest = new StringRequest(Request.Method.POST,CONFIRM_URL, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         //if the server response is success
@@ -109,7 +109,6 @@ public class Verify_Mobile extends AppCompatActivity implements View.OnClickList
 
                                 Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
 
-
                                 Intent intent=new Intent(Verify_Mobile.this,GetStart.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -120,6 +119,7 @@ public class Verify_Mobile extends AppCompatActivity implements View.OnClickList
                                 editor=pref.edit();
                                 editor.putString("usertyp", usertyp);
                                 editor.commit();
+
                             }else{
 
                                 Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
@@ -183,7 +183,6 @@ public class Verify_Mobile extends AppCompatActivity implements View.OnClickList
                                 loading.dismiss();
 
                                 Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
-
 
                                 Intent intent=new Intent(Verify_Mobile.this,Verify_Mobile.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

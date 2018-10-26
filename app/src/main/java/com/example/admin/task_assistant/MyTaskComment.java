@@ -63,7 +63,6 @@ public class MyTaskComment extends AppCompatActivity implements View.OnClickList
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +102,7 @@ public class MyTaskComment extends AppCompatActivity implements View.OnClickList
         GROUP_NAME = getIntent().getExtras().getString("GROUP_NAME");
         // TASK_STATUS = getIntent().getStringExtra("TASK_STATUS");
 
-        // t1 = (TextView) findViewById(R.id.task_title);
+
         t2 = (TextView) findViewById(R.id.etDes);
         update = (Button) findViewById(R.id.update);
         comment_task = (Button) findViewById(R.id.t_comment);
@@ -135,14 +134,12 @@ public class MyTaskComment extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        //Bundle bundle=getIntent().getExtras();
-        //TASK_ID = bundle.getString("TASK_ID");
+
         taskDetails(TASK_ID);
 
     }
 
     private void doneStatus() throws JSONException {
-
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest postRequest = new StringRequest(Request.Method.POST, TASK_DONE_URL,
@@ -158,7 +155,6 @@ public class MyTaskComment extends AppCompatActivity implements View.OnClickList
 
                         try {
                             if (jsonObject.getInt("success") == 1) {
-                                //dismissing the progressbar
 
                                 // Snackbar.make(rootLayout, jsonObject.getString("message") + "", Snackbar.LENGTH_LONG)
                                 //        .show();
@@ -204,7 +200,7 @@ public class MyTaskComment extends AppCompatActivity implements View.OnClickList
             }
         };
 
-        //Adding the request to the queue
+
         int socketTimeout = 30000;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         postRequest.setRetryPolicy(policy);
@@ -228,15 +224,10 @@ public class MyTaskComment extends AppCompatActivity implements View.OnClickList
                             for (int i = 0; i < numberOfItemsInResp; i++) {
                                 JSONObject jsonObject = (JSONObject) jsonObj.get(i);
 
-                                //String TASK_TITLE = jsonObject.getString("TASK_TITLE");
-                                //t1.setText(TASK_TITLE);
                                 String TASK_DES = jsonObject.getString("TASK_DES");
                                 t2.setText(TASK_DES);
-                                // String priority = jsonObject.getString("TASK_PRIORITY");
-                                // t5.setText(priority);
 
                             }
-
 
                         } catch (JSONException e) {
                             Toast.makeText(MyTaskComment.this, response, Toast.LENGTH_LONG).show();
@@ -273,14 +264,12 @@ public class MyTaskComment extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
 
         try {
-            //  Bundle bundle=getIntent().getExtras();
-            // TASK_ID = bundle.getString("TASK_ID");
+
             comment();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
     private void comment() throws JSONException {
 
         LayoutInflater li = LayoutInflater.from(this);

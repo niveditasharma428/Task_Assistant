@@ -35,7 +35,6 @@ public class ShowGroupAdapter extends RecyclerView.Adapter<ShowGroupAdapter.MyVi
     String mobile, name, admin_name, admin_mob;
     ShowGroupAdapter showGroupAdapter;
 
-
     public ShowGroupAdapter(Context context, List<MemberDetails> groupMembersList) {
         this.context = context;
         this.groupMembersList = groupMembersList;
@@ -64,7 +63,6 @@ public class ShowGroupAdapter extends RecyclerView.Adapter<ShowGroupAdapter.MyVi
         holder.txt_date.setText(groupMembers.getCREATED_DATE());
         holder.txt_createdby.setText("Created By:-" + groupMembers.getCREATED_BY());
         System.out.println("DivyaAdmin:-" + admin_name);
-
 
         holder.iv_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,7 +190,6 @@ public class ShowGroupAdapter extends RecyclerView.Adapter<ShowGroupAdapter.MyVi
                     }
                 });
 
-
             }
         });
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -230,7 +227,6 @@ public class ShowGroupAdapter extends RecyclerView.Adapter<ShowGroupAdapter.MyVi
             iv_delete = (ImageView) itemView.findViewById(R.id.iv_delete);
             iv_edit = (ImageView) itemView.findViewById(R.id.iv_edit);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.layout1);
-
 
         }
     }

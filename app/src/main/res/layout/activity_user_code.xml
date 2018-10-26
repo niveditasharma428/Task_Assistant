@@ -107,10 +107,6 @@ tools:context=".User_code">
 
     </LinearLayout>
 
-
-
-
-
     <Button
         android:id="@+id/Login"
         android:layout_width="match_parent"
@@ -123,9 +119,5 @@ tools:context=".User_code">
         android:text="Already Verified?\nLogin Here"
         android:textAllCaps="true"
         android:textColor="@color/white" />
-
-
-
-
 
 </LinearLayout>

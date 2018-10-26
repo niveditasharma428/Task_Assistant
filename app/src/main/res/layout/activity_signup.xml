@@ -222,9 +222,6 @@ tools:context=".Signup">
         android:textAllCaps="true"
         android:textColor="@color/white" />
 
-
-
-
 </RelativeLayout>
 
 </RelativeLayout>

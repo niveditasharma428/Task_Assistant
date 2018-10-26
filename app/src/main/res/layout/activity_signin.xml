@@ -10,7 +10,6 @@ android:animateLayoutChanges="true"
     tools:context=".Signin">
 
 
-
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -18,7 +17,6 @@ android:animateLayoutChanges="true"
     android:layout_marginLeft="40dp"
     android:id="@+id/rLayout"
     android:layout_marginRight="40dp">
-
 
 
     <RelativeLayout

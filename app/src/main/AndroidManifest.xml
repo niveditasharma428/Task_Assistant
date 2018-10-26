@@ -103,7 +103,7 @@
         <activity
             android:name=".GroupCloseTask"
             android:label="@string/title_activity_group_close_task"
-            android:theme="@style/AppTheme2"></activity>
+            android:theme="@style/AppTheme2" />
     </application>
 
 </manifest>

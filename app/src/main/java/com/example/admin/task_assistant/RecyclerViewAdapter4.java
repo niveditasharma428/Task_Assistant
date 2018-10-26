@@ -15,10 +15,12 @@ import android.widget.Toast;
 import com.example.admin.task_assistant.Network.APIClient;
 import com.example.admin.task_assistant.model.GroupDetails;
 import com.example.admin.task_assistant.model.MyTodoDetails;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,13 +62,32 @@ public class RecyclerViewAdapter4 extends RecyclerView.Adapter<RecyclerViewAdapt
         holder.t2.setText(myTodoDetails.getTaskGroup());
         holder.t3.setText(myTodoDetails.getNoOfTask());
 
+
         if(myTodoDetails.getNoOfTask().isEmpty()){
             holder.t3.setVisibility(View.INVISIBLE);
         } else {
             holder.t3.setVisibility(View.VISIBLE);
         }
+
         // holder.t2.setText(mDataOBJ.getSeen());
 //        holder.img.setImageResource(mData.get(position).getPhoto());
+
+
+        if(myTodoDetails.getImage().equals("")){
+
+            holder.circleImageView.setImageResource(R.drawable.pro1);
+        }
+        else {
+            System.out.println("Contact:"+myTodoDetails.getImage());
+
+
+            // Picasso.with((context)).load(mDataOBJ.getImage())
+
+            Picasso.with((context)).load("https://orgone.solutions/task/image/"+myTodoDetails.getImage())
+                    .into(holder.circleImageView);
+        }
+
+
         holder.data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,6 +139,8 @@ public class RecyclerViewAdapter4 extends RecyclerView.Adapter<RecyclerViewAdapt
         public ImageView img;
         public TextView t1, t2, t3;
         LinearLayout data;
+        CircleImageView circleImageView;
+
 
         public ViewHolder(View itemView) {
 
@@ -128,6 +151,7 @@ public class RecyclerViewAdapter4 extends RecyclerView.Adapter<RecyclerViewAdapt
             t2 = (TextView) itemView.findViewById(R.id.textViewGroupName);
             t3 = (TextView) itemView.findViewById(R.id.count);
             data = (LinearLayout) itemView.findViewById(R.id.layout1);
+            circleImageView=(CircleImageView)itemView.findViewById(R.id.image);
 
 
         }

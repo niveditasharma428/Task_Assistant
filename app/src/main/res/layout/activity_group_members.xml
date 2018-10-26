@@ -7,9 +7,6 @@
     android:background="#ffffff"
     tools:context=".GroupMember">
 
-
-
-
     <LinearLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -23,8 +20,7 @@
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/baseline_arrow_back_white_36dp"
-            />
+            android:src="@drawable/baseline_arrow_back_white_36dp"/>
 
 
         <TextView
@@ -36,6 +32,7 @@
             android:textColor="#ffffff"
             android:textSize="18dp"
             android:textStyle="bold" />
+
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -46,8 +43,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclemem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
+
+
     </android.support.v4.widget.SwipeRefreshLayout>
 
 

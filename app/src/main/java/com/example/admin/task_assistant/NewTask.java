@@ -59,7 +59,6 @@ public class NewTask extends AppCompatActivity {
     private static String ADD_TASK_URL = "https://orgone.solutions/task/task.php";
     private static String CONTACT_URL = "https://orgone.solutions/task/userdata.php";
 
-
     public void attachBaseContext(Context newBase){
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
@@ -91,14 +90,10 @@ public class NewTask extends AppCompatActivity {
             }
         });
 
-
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
         name=pref.getString("name", "");
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
-
 
         spinnerDropDown =(Spinner)findViewById(R.id.spinner1);
 
@@ -108,12 +103,9 @@ public class NewTask extends AppCompatActivity {
         spinnerDropDown2=(Spinner)findViewById(R.id.spinner3);
         loadSpinnerData();
 
-
         t2= (EditText)findViewById(R.id.etDes);
         assign=(Button)findViewById(R.id.buttonAssign);
         cancel=(Button)findViewById(R.id.cancel);
-
-
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +118,6 @@ public class NewTask extends AppCompatActivity {
                 overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-
 
         ArrayAdapter<String> adapter= new ArrayAdapter<String>(this,android.
                 R.layout.simple_spinner_dropdown_item ,priority);
@@ -169,7 +160,6 @@ public class NewTask extends AppCompatActivity {
             }
         });
 
-
         assign.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -179,7 +169,6 @@ public class NewTask extends AppCompatActivity {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
-
 
                 String 	TASK_DES = t2.getText().toString();
                 String  CREATED_BY=pref.getString("name", "");
@@ -206,7 +195,6 @@ public class NewTask extends AppCompatActivity {
 
         int i = 0;
 
-
         StringRequest stringRequest=new StringRequest(Request.Method.POST, CONTACT_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -219,7 +207,6 @@ public class NewTask extends AppCompatActivity {
                         String name = jsonObject.getString("name");
 
                         ContactName.add( name);
-
                     }
                     spinnerDropDown2.setAdapter(new ArrayAdapter<String>(NewTask.this, android.R.layout.simple_spinner_dropdown_item, ContactName));
 
@@ -243,7 +230,6 @@ public class NewTask extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-
     private void task(String signupUrl, final String getTASK_DES,final String getTASK_PRIORITY,final String getCREATED_BY,final String getTASK_ASSIGN){
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -257,8 +243,6 @@ public class NewTask extends AppCompatActivity {
 
                     if(jsonObject.getInt("success")==0)
                     {
-
-
                         Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
 
                     }

@@ -82,13 +82,14 @@ tools:context=".TaskAssignComment">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="45dp"
-    android:gravity="center"
+    android:layout_marginTop="30dp"
+    android:gravity="right"
+    android:layout_marginRight="16dp"
     android:orientation="horizontal">
 
     <Button android:id="@+id/reassign"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:background="@color/colorPrimary"
         android:text="Reassign"
         android:layout_margin="5dp"
@@ -97,8 +98,8 @@ tools:context=".TaskAssignComment">
 
     <Button
         android:id ="@+id/close"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:text="Close"
         android:layout_margin="5dp"
         android:textAllCaps="false"
@@ -106,6 +107,29 @@ tools:context=".TaskAssignComment">
         android:background="@drawable/button_bg_stroke"/>
 
 </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rellay2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+        <Button
+            android:id="@+id/close_reassign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@color/transparent"
+            android:fontFamily="sans-serif"
+            android:layout_alignParentBottom="true"
+            android:text="Close and Reassign"
+            android:textAllCaps="true"
+            android:textColor="#156995" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>

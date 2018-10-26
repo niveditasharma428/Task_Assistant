@@ -9,6 +9,13 @@
             android:id="@+id/nav_mydashboard"
             android:icon="@drawable/dash"
             android:title="My Dashboard" />
+
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/profile"
+            android:title="My Profile" />
+
         <item
             android:id="@+id/nav_contact"
             android:icon="@drawable/contact1"
@@ -18,6 +25,11 @@
             android:id="@+id/nav_newtask"
             android:icon="@drawable/create"
             android:title="Create Task" />
+
+        <item
+            android:id="@+id/nav_assigntask"
+            android:icon="@drawable/assign"
+            android:title="Assign Task" />
        <!-- <item
             android:id="@+id/nav_mytask"
             android:icon="@drawable/baseline_format_list_numbered_black_48dp"
@@ -31,10 +43,7 @@
             android:id="@+id/nav_mygrouptodo"
             android:icon="@drawable/group_task"
             android:title="My Group Todo" />
-        <item
-            android:id="@+id/nav_assigntask"
-            android:icon="@drawable/assign"
-            android:title="Assign Task" />
+
 
         <item
             android:id="@+id/nav_closetask"
@@ -46,18 +55,6 @@
             android:icon="@drawable/group_close"
             android:title="Group Close Task" />
 
-
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/profile"
-            android:title="My Profile" />
-
-
-
-        <item
-            android:id="@+id/nav_add_contact"
-            android:icon="@drawable/add_users"
-            android:title="Add Users" />
 
 
         <item
@@ -74,6 +71,11 @@
             android:id="@+id/nav_mygroups"
             android:icon="@drawable/grouptask"
             android:title="My Groups" />
+
+        <item
+            android:id="@+id/nav_add_contact"
+            android:icon="@drawable/add_users"
+            android:title="Add Users" />
 
 
 

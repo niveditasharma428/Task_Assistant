@@ -23,9 +23,6 @@ tools:context=".NewTask"
         app:titleMarginStart="28dp"
         app:titleTextColor="@color/white" />
 
-
-
-
     <EditText
         android:id="@+id/etDes"
         android:layout_width="match_parent"
@@ -70,10 +67,6 @@ tools:context=".NewTask"
         android:background="@drawable/edit_style" />
 </LinearLayout>
 
-
-
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:paddingTop="15sp"
@@ -100,14 +93,9 @@ tools:context=".NewTask"
         android:textColor="@android:color/black"
         android:fontFamily="sans-serif-light"
         android:background="@drawable/edit_style"
-        style="@style/spinnerItemStyle"
-
-       />
-
+        style="@style/spinnerItemStyle" />
 
 </LinearLayout>
-
-
 
 
 <LinearLayout
@@ -139,6 +127,5 @@ tools:context=".NewTask"
         android:textColor="@color/colorPrimary"
         android:background="@drawable/button_bg_stroke"/>
 </LinearLayout>
-
 
 </LinearLayout>

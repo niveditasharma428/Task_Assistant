@@ -88,9 +88,6 @@
                 android:textColor="@color/pink"
                 android:textSize="13dp" />
 
-
-
-
         </LinearLayout>
 
         <LinearLayout

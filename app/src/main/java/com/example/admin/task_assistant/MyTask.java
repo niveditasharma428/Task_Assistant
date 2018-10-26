@@ -32,6 +32,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.admin.task_assistant.model.MyTodo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,8 +46,7 @@ import java.util.Map;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MyTask extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MyTask extends AppCompatActivity {
 
     List<Contact1> ListOfcontact1 = new ArrayList<>();
     RecyclerView recyclerView;
@@ -79,8 +79,23 @@ public class MyTask extends AppCompatActivity
 
         setContentView(R.layout.activity_my_task);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_24dp);
         setSupportActionBar(toolbar);
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(MyTask.this, MyTodoTask.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("CREATED_BY", CREATED_BY);
+                intent.putExtra("GROUP_NAME", GROUP_NAME);
+                startActivity(intent);
+                overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+
+            }
+        });
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
         name = pref.getString("name", "");
         email = pref.getString("email", "");
@@ -92,23 +107,6 @@ public class MyTask extends AppCompatActivity
 
         System.out.println("Groupname:-" + GROUP_NAME);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
-        View view = navigationView.getHeaderView(0);
-        name1 = (TextView) view.findViewById(R.id.name);
-        email1 = (TextView) view.findViewById(R.id.mailid);
-
-
-        navigationView.setNavigationItemSelectedListener(this);
-
-        name1.setText(name);
-        email1.setText(email);
 
         ListOfcontact1 = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view1);
@@ -127,9 +125,7 @@ public class MyTask extends AppCompatActivity
                 recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                //  Toast.makeText(MyTask.this, "Single Click on position        :"+position,
-                //      Toast.LENGTH_SHORT).show();
+
                 update(ListOfcontact1.get(position).getTASK_ID());
 
 
@@ -148,34 +144,6 @@ public class MyTask extends AppCompatActivity
 
         System.out.println("Task_Login:-"+usertyp);
 
-        if(!usertyp.equalsIgnoreCase("txtadmin")) {
-
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_add_contact).setVisible(false);
-            nav_Menu.findItem(R.id.nav_group).setVisible(false);
-            nav_Menu.findItem(R.id.nav_closegrouptask).setVisible(false);
-            nav_Menu.findItem(R.id.nav_mygroups).setVisible(true);
-            nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(true);
-            nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(true);
-
-        }
-        else if(usertyp.equalsIgnoreCase("txtadmin"))
-        {
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_add_contact).setVisible(true);
-            nav_Menu.findItem(R.id.nav_group).setVisible(true);
-            nav_Menu.findItem(R.id.nav_closegrouptask).setVisible(true);
-            nav_Menu.findItem(R.id.nav_mygroups).setVisible(false);
-            nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(false);
-            nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(false);
-
-
-        }
-        else
-        {
-            Toast.makeText(MyTask.this, "error", Toast.LENGTH_LONG).show();
-
-        }
 
     }
 
@@ -212,7 +180,6 @@ public class MyTask extends AppCompatActivity
                         String STATUS = jsonObject.getString("TASK_STATUS");
                         String COMMENT = jsonObject.getString("TASK_COMMENT");
 
-
                         pref = getApplicationContext().getSharedPreferences("Options", MODE_PRIVATE);
                         editor = pref.edit();
                         editor.putString("TASK_ID", TASK_ID);
@@ -223,13 +190,11 @@ public class MyTask extends AppCompatActivity
                         ListOfcontact1.add(mData1);
                         recyclerView.setAdapter(recyclerViewadapter1);
 
-
                     }
 
                 } catch (JSONException e) {
                     Toast.makeText(MyTask.this, response, Toast.LENGTH_LONG).show();
                 }
-
 
             }
 
@@ -338,7 +303,6 @@ public class MyTask extends AppCompatActivity
 
     }
 
-
     @Override
     public void onBackPressed() {
         Intent back = new Intent(getApplicationContext(), MyTodoTask.class);
@@ -348,75 +312,6 @@ public class MyTask extends AppCompatActivity
         overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_contact) {
-            Intent intent = new Intent(MyTask.this, MyContact.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
-        } else if (id == R.id.nav_assigntask) {
-            Intent intent = new Intent(MyTask.this, TaskAssign.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
-        } else if (id == R.id.nav_newtask) {
-            Intent intent = new Intent(MyTask.this, NewTask.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
-        } else if (id == R.id.nav_closetask) {
-            Intent intent = new Intent(MyTask.this, Close.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
-        } else if (id == R.id.nav_profile) {
-            Intent intent = new Intent(MyTask.this, Profile.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        } else if (id == R.id.nav_mydashboard) {
-            Intent intent = new Intent(MyTask.this, Dashboard.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
-        } else if (id == R.id.nav_add_contact) {
-            Intent intent = new Intent(MyTask.this, Add_Contact.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
-        } else if (id == R.id.nav_group) {
-            Intent intent = new Intent(MyTask.this, Group.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        }
-        else if (id == R.id.nav_mygroupTask) {
-            Intent intent = new Intent(MyTask.this, MyGroupTask.class);
-            startActivity(intent);
-            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
-        }
-        else if (id == R.id.nav_mygroups) {
-            Intent intent = new Intent(MyTask.this, MyGroups.class);
-            startActivity(intent);
-            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
-        }
-
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
     static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 

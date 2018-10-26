@@ -50,35 +50,12 @@
 
                     <RelativeLayout
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/title">
-
-
-                        <ImageView
-                            android:id="@+id/imageView"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="@dimen/margin_between_text"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/user2" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@+id/title"
                         android:layout_weight="1">
 
 
-                        <!-- <ImageView
-                         android:id="@+id/arrow"
-                         android:layout_width="30dp"
-                         android:layout_height="30dp"
-                         android:layout_marginLeft="5dp"
-                         android:src="@drawable/profile1"/>-->
 
                         <TextView
                             android:id="@+id/task_assign"
@@ -109,11 +86,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@+id/title"
-                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="1">
 
 
-                        <TextView
+                       <!-- <TextView
                             android:id="@+id/txt"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
@@ -121,7 +98,7 @@
                             android:src="@drawable/profile"
                             android:text="Group Name :-"
                             android:textColor="@color/black"
-                            android:textSize="17sp" />
+                            android:textSize="17sp" />-->
 
                         <TextView
                             android:id="@+id/task_group"
@@ -135,7 +112,7 @@
                             android:layout_toRightOf="@+id/txt"
                             android:fontFamily="sans-serif-light"
                             android:text="Name"
-                            android:textColor="@color/black"
+                            android:textColor="@color/sub_title"
                             android:textSize="17sp" />
 
                     </RelativeLayout>
@@ -183,38 +160,6 @@
                         android:weightSum="2">
 
 
-                        <!--<com.facebook.drawee.view.SimpleDraweeView xmlns:fresco="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/image_cartlist" android:layout_width="0dp"
-                            android:layout_height="80dp"
-                            android:layout_weight="1"
-                            android:layout_gravity="center_vertical"
-                            fresco:placeholderImage="@color/stay_color"/>-->
-
-                        <!--  <RelativeLayout
-                              android:id="@+id/status"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content">
-
-                              <ImageView
-                                  android:id="@+id/CarImageView"
-                                  android:layout_width="100dp"
-                                  android:layout_height="100dp"
-                                  android:src="@mipmap/ic_launcher"
-                                  android:layout_marginBottom="5dp"/>
-
-                              <TextView android:id="@+id/car_status"
-                                  android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"
-                                  android:layout_gravity="center_vertical"
-                                  android:text="Status:Car Booked"
-                                  android:layout_marginLeft="@dimen/top_margin"
-                                  android:textColor="#4CAF50"
-                                  android:layout_marginTop="@dimen/margin_between_text"
-                                  android:layout_below="@+id/CarImageView"
-                                  android:textSize="11sp" />
-
-
-                          </RelativeLayout>-->
                         <LinearLayout
                             android:id="@+id/layout_item_desc1"
                             android:layout_width="match_parent"
@@ -272,12 +217,6 @@
                                     android:layout_weight="1">
 
 
-                                    <!-- <ImageView
-                                     android:id="@+id/arrow"
-                                     android:layout_width="30dp"
-                                     android:layout_height="30dp"
-                                     android:layout_marginLeft="5dp"
-                                     android:src="@drawable/profile1"/>-->
 
                                     <TextView
                                         android:id="@+id/priority"
@@ -297,90 +236,8 @@
                             </LinearLayout>
 
 
-                            <!-- <TextView
-                            android:id="@+id/comment"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Comment"
-                            android:singleLine="true"
-                            android:lines="3"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/white"
-                            android:textSize="13dp" />
-        -->
                         </LinearLayout>
 
-
-                        <!--
-                                </LinearLayout>
-
-
-                                <View android:layout_width="match_parent"
-                                    android:layout_height="@dimen/view_width_small"
-                                    android:background="@color/grey_light"
-                                    android:layout_marginTop="@dimen/margin_medium"/>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="8dp"
-                                    android:weightSum="2">
-
-                                    <LinearLayout android:id="@+id/layout_action1"
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:gravity="center"
-                                        android:orientation="horizontal"
-                                        android:weightSum="2">
-                                        <TextView android:id="@+id/text_action1"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:layout_marginLeft="8dp"
-                                            android:text="Cancel"
-                                            android:textSize="12dp"
-                                            android:textColor="@color/gen_black"
-                                            android:gravity="left"/>
-                                    </LinearLayout>
-
-                                    <View android:layout_width="@dimen/view_width_small"
-                                        android:layout_height="match_parent"
-                                        android:background="@color/grey_light"/>
-
-                                    <LinearLayout android:id="@+id/layout_action2"
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:gravity="center"
-                                        android:orientation="horizontal"
-                                        android:weightSum="2">
-                                        <TextView android:id="@+id/text_action2"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:layout_marginLeft="8dp"
-                                            android:text="Need help"
-                                            android:textSize="12dp"
-                                            android:textColor="@color/gen_black"
-                                            android:gravity="left"/>
-                                    </LinearLayout>
-
-                                </LinearLayout>
-                                <View android:layout_width="match_parent"
-                                    android:layout_height="@dimen/view_width_small"
-                                    android:background="@color/grey_light"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginBottom="8dp"/>-->
-
-                        <!-- <ImageView
-                             android:id="@+id/arrow"
-                             android:layout_width="33dp"
-                             android:layout_height="33dp"
-                             android:layout_gravity="center"
-                             android:layout_marginRight="@dimen/top_margin"
-                             android:src="@drawable/ic_keyboard_arrow_right_black_36dp" />-->
                     </LinearLayout>
 
 

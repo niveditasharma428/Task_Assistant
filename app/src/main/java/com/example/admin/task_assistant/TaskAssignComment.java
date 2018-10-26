@@ -12,9 +12,12 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,14 +30,21 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.admin.task_assistant.Network.APIClient;
+import com.example.admin.task_assistant.model.ContactDetails;
+import com.example.admin.task_assistant.model.GroupDetails;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -43,14 +53,20 @@ public class TaskAssignComment extends AppCompatActivity implements View.OnClick
     String TASK_ID, mobile, name, email;
     SharedPreferences pref;
     TextView t2,t3;
-    Button button_Reassign,button_Close;
+    Button button_Reassign,button_Close,close_reassign;
     LinearLayout rootLayout;
-    Button update, send;
+    Button update, send,send1;
     EditText comment, Mycomment;
+    Spinner spinnerDropDown;
+    ArrayList<String> ContactName;
+
+
 
     private static String REASSIGN_URL = "https://orgone.solutions/task/taskreasign.php";
     private static String TASK_ASSIGN_DETAILS_URL = "https://orgone.solutions/task/taskdetails.php";
     private static String TASK_CLOSE_URL = "https://orgone.solutions/task/taskclose.php";
+    String CLOSE_REASSIGN_URL = "https://orgone.solutions/task/closetask_reassign.php";
+
 
 
     public void attachBaseContext(Context newBase){
@@ -84,9 +100,6 @@ public class TaskAssignComment extends AppCompatActivity implements View.OnClick
             }
         });
 
-
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
         name = pref.getString("name", "");
         email = pref.getString("email", "");
@@ -97,6 +110,7 @@ public class TaskAssignComment extends AppCompatActivity implements View.OnClick
 
         t2 = (TextView) findViewById(R.id.etDes);
         t3 = (TextView) findViewById(R.id.status);
+        close_reassign=(Button)findViewById(R.id.close_reassign);
 
         button_Reassign = (Button) findViewById(R.id.reassign);
         button_Close = (Button) findViewById(R.id.close);
@@ -119,7 +133,9 @@ public class TaskAssignComment extends AppCompatActivity implements View.OnClick
 
         button_Reassign.setOnClickListener(this);
 
+
     }
+
 
     public void taskDetails(final String TASK_ID) {
 
@@ -137,14 +153,11 @@ public class TaskAssignComment extends AppCompatActivity implements View.OnClick
                             for (int i = 0; i < numberOfItemsInResp; i++) {
                                 JSONObject jsonObject = (JSONObject) jsonObj.get(i);
 
-                               // String TASK_TITLE = jsonObject.getString("TASK_TITLE");
-                              //  t1.setText(TASK_TITLE);
                                 String TASK_DES = jsonObject.getString("TASK_DES");
                                 t2.setText(TASK_DES);
                                 String TASK_STATUS = jsonObject.getString("TASK_STATUS");
                                 t3.setText(TASK_STATUS);
-                                // String priority = jsonObject.getString("TASK_PRIORITY");
-                                // t5.setText(priority);
+
 
                             }
 
@@ -179,7 +192,6 @@ public class TaskAssignComment extends AppCompatActivity implements View.OnClick
     }
 
     private void closeStatus() throws JSONException {
-
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest postRequest = new StringRequest(Request.Method.POST, TASK_CLOSE_URL,
@@ -335,7 +347,6 @@ public class TaskAssignComment extends AppCompatActivity implements View.OnClick
                         return params;
                     }
                 };
-
 
                 int socketTimeout = 30000;
                 RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);

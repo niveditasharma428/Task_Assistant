@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class Signup extends AppCompatActivity  {
     EditText Name, Email , Password ;
     TextView Mobile;
@@ -43,7 +42,6 @@ public class Signup extends AppCompatActivity  {
     Button login_here;
     String mobile;
     RelativeLayout rootLayout;
-
 
     SharedPreferences.Editor editor;
     SharedPreferences.Editor editor5;
@@ -75,7 +73,6 @@ public class Signup extends AppCompatActivity  {
         Mobile.addTextChangedListener(new MyTextWatcher(Mobile));
         Password.addTextChangedListener(new MyTextWatcher(Password));
 
-
         login_here.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,8 +88,6 @@ public class Signup extends AppCompatActivity  {
             }
         });
 
-
-
         btnSignup=(Button)findViewById(R.id.buttonRegister);
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +99,6 @@ public class Signup extends AppCompatActivity  {
 
                 Pattern p = Pattern.compile(Constants.regEx);
                 Matcher m = p.matcher(userEmail);
-
 
                 //		Pattern match for Mobile No
                 Pattern mobi = Pattern.compile(Constants.mobregEx);
@@ -137,7 +131,6 @@ public class Signup extends AppCompatActivity  {
                            // Snackbar.make(rootLayout,"Register Success fully ",Snackbar.LENGTH_SHORT)
                                  //   .show();
 
-
                         } else {
                             Toast.makeText(getApplicationContext(), "No internet Connection", Toast.LENGTH_SHORT).show();
                         }
@@ -161,7 +154,6 @@ public class Signup extends AppCompatActivity  {
 
 
     }
-
 
     private void register(String signupUrl, final String getuserName, final String getuserEmail, final String getuserMobile, final String getuserPassword) {
 
@@ -193,12 +185,10 @@ public class Signup extends AppCompatActivity  {
                         startActivity(intent);
                         overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
 
-
                     }
 
                     else if(jsonObject.getInt("success")==5){
                         Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
-
 
                         Intent intent=new Intent(Signup.this, User_code.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

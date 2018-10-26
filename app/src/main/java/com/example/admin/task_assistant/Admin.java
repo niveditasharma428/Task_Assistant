@@ -40,7 +40,6 @@ public class Admin extends AppCompatActivity implements View.OnClickListener{
     private RequestQueue requestQueue;
     private static String ADMIN_REG_URL = "https://orgone.solutions/task/register_data.php";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +86,6 @@ public class Admin extends AppCompatActivity implements View.OnClickListener{
                         Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
                     }
                     else if(jsonObject.getInt("success")==1){
-
 
                         Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(Admin.this, Verify_Mobile.class);
@@ -151,7 +149,6 @@ public class Admin extends AppCompatActivity implements View.OnClickListener{
         String userMobile = Mobile.getText().toString();
         String userPassword= Password.getText().toString();
         String occupation = Organisation.getText().toString();
-
 
         // Pattern match for email id
         Pattern p = Pattern.compile(Constants.regEx);

@@ -100,16 +100,13 @@ public class MyGroupTodo extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        // navigationView.setNavigationItemSelectedListener(this);
+
         View view = navigationView.getHeaderView(0);
         name1 = (TextView) view.findViewById(R.id.name);
         email1 = (TextView) view.findViewById(R.id.mailid);
         profile=(CircleImageView)view.findViewById(R.id.imageView);
         t3 = (TextView) findViewById(R.id.count);
 
-      /*  Bundle bundle=getIntent().getExtras();
-        name1.setText(bundle.getString("name", String.valueOf(bundle)));
-        email1.setText(bundle.getString("email", String.valueOf(bundle)));*/
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
@@ -117,45 +114,19 @@ public class MyGroupTodo extends AppCompatActivity
         name = pref.getString("name", "");
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
-       // name1.setText(name);
-       // email1.setText(email);
 
         ListOfcontact4 = new ArrayList<>();
-        //recyclerView1 = (RecyclerView) findViewById(R.id.my_recycler_view4);
         recyclerView2 = (RecyclerView) findViewById(R.id.my_recycler_view5);
-        //  recyclerViewadapter4 = new RecyclerViewAdapter4(ListOfcontact4, getApplicationContext());
-
 
         contactData();
 
-
-      /*  recyclerView1.addOnItemTouchListener(new MyTask.RecyclerTouchListener(this,
-                recyclerView1, new MyTask.ClickListener() {
-            @Override
-            public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                //  Toast.makeText(MyTask.this, "Single Click on position        :"+position,
-                //      Toast.LENGTH_SHORT).show();
-                update(aluser1.get(position).getCreatedBY());
-
-
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-                Toast.makeText(MyGroupTodo.this, "Long press on position :" + position,
-                        Toast.LENGTH_LONG).show();
-            }
-        }));*/
 
 
         recyclerView2.addOnItemTouchListener(new MyTask.RecyclerTouchListener(this,
                 recyclerView2, new MyTask.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                //  Toast.makeText(MyTask.this, "Single Click on position        :"+position,
-                //      Toast.LENGTH_SHORT).show();
+
                 update(aluser2.get(position).getCreatedBY());
 
 
@@ -237,9 +208,6 @@ public class MyGroupTodo extends AppCompatActivity
                                     .into(profile);
                         }
 
-
-
-
                     }
 
                 } catch (JSONException e) {
@@ -254,7 +222,6 @@ public class MyGroupTodo extends AppCompatActivity
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-
                         Toast.makeText(MyGroupTodo.this, error.toString(), Toast.LENGTH_LONG).show();
 
                     }
@@ -266,7 +233,6 @@ public class MyGroupTodo extends AppCompatActivity
                 params.put("mobile", mobile);
                 params.put("usertyp", usertyp);
 
-
                 return params;
             }
 
@@ -274,7 +240,6 @@ public class MyGroupTodo extends AppCompatActivity
 
         RequestQueue requestQueue = Volley.newRequestQueue(MyGroupTodo.this);
         requestQueue.add(stringRequest);
-
 
     }
 
@@ -373,47 +338,29 @@ public class MyGroupTodo extends AppCompatActivity
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
                     MyTodo myTodo = response.body();
-                    List<MyTodoDetails> myTodoDetailsUser1 = new ArrayList<>();
                     List<MyTodoDetails> myTodoDetailsUser2 = new ArrayList<>();
 
                     if (myTodo.getSuccess().equalsIgnoreCase("1")) {
-                        myTodoDetailsUser1 = myTodo.getMyTodoDetailsListUser1();
                         myTodoDetailsUser2 = myTodo.getMyTodoDetailsListUser2();
 
-
-                        for (int i = 0; i < myTodoDetailsUser1.size(); i++) {
-
-                            String task_group = myTodoDetailsUser1.get(i).getTaskGroup();
-                            String created_by = myTodoDetailsUser1.get(i).getCreatedBY();
-                            String no_oftask = myTodoDetailsUser1.get(i).getNoOfTask();
-
-                            aluser1.add(new MyTodoDetails(created_by, no_oftask, task_group));
-
-                            System.out.println("DivyaTodoTask:-" + task_group + created_by + no_oftask);
-
-
-                        }
 
                         for (int i = 0; i < myTodoDetailsUser2.size(); i++) {
 
                             String task_group = myTodoDetailsUser2.get(i).getTaskGroup();
                             String created_by = myTodoDetailsUser2.get(i).getCreatedBY();
                             String no_oftask = myTodoDetailsUser2.get(i).getNoOfTask();
+                            String image=myTodoDetailsUser2.get(i).getImage();
 
-                            aluser2.add(new MyTodoDetails(created_by, no_oftask, task_group));
+                            aluser2.add(new MyTodoDetails(created_by, no_oftask, task_group,image));
 
                             System.out.println("DivyaTodoTask:-" + task_group + created_by + no_oftask);
 
-
                         }
-                      //  recyclerViewadapter4 = new RecyclerViewAdapter4(aluser1, getApplicationContext());
                         recyclerViewadapter5 = new RecyclerViewAdapter5(aluser2, getApplicationContext());
 
                         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         LinearLayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext());
 
-                      //  recyclerView1.setLayoutManager(mLayoutManager);
-                      //  recyclerView1.setAdapter(recyclerViewadapter4);
                         recyclerView2.setLayoutManager(mLayoutManager1);
                         recyclerView2.setAdapter(recyclerViewadapter5);
 

@@ -43,6 +43,4 @@
         android:visibility="gone"/>
     </LinearLayout>
 
-
-
 </android.support.constraint.ConstraintLayout>

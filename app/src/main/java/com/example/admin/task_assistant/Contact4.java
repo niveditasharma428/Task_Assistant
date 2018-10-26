@@ -6,9 +6,11 @@ public class Contact4 {
     public String TaskAssign;
     public String Task;
 
-    public Contact4(String name, String task) {
-        this.Name = name;
-        this.Task = task;
+
+    public Contact4(String name, String taskAssign, String task) {
+        Name = name;
+        TaskAssign = taskAssign;
+        Task = task;
 
     }
 

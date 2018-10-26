@@ -51,6 +51,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Close extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     private Toolbar toolbar;
 
     List<Contact4> ListOfcontact4 = new ArrayList<>();
@@ -70,8 +71,6 @@ public class Close extends AppCompatActivity
 
     ArrayList<CloseTaskDetails> aluser1 = new ArrayList();
     ArrayList<CloseTaskDetails> aluser2 = new ArrayList();
-
-    TextView txt1, txt2;
 
     LinearLayout layout1;
     private static String PROFILE_URL = "https://orgone.solutions/task/profile.php";
@@ -101,7 +100,7 @@ public class Close extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        // navigationView.setNavigationItemSelectedListener(this);
+
         View view = navigationView.getHeaderView(0);
         name1 = (TextView) view.findViewById(R.id.name);
         email1 = (TextView) view.findViewById(R.id.mailid);
@@ -111,9 +110,6 @@ public class Close extends AppCompatActivity
         txtnorec = (TextView)findViewById(R.id.txtnorec);
         no_record=(ImageView)findViewById(R.id.no_record);
 
-      /*  Bundle bundle=getIntent().getExtras();
-        name1.setText(bundle.getString("name", String.valueOf(bundle)));
-        email1.setText(bundle.getString("email", String.valueOf(bundle)));*/
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
@@ -121,22 +117,13 @@ public class Close extends AppCompatActivity
         name = pref.getString("name", "");
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
-       // name1.setText(name);
-      //  email1.setText(email);
+
 
         ListOfcontact4 = new ArrayList<>();
         recyclerView6 = (RecyclerView) findViewById(R.id.my_recycler_view4);
-      //  recyclerView7 = (RecyclerView) findViewById(R.id.my_recycler_view5);
-       // txt1 = (TextView) findViewById(R.id.txt1);
-       // txt2 = (TextView) findViewById(R.id.txt2);
-
-        //txt1.setText("Closed Task");
-        //txt2.setText("Closed Group Task");
-
 
         pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
         usertyp = pref.getString("usertyp", "");
-
 
         System.out.println("Task_Login:-"+usertyp);
 
@@ -161,8 +148,8 @@ public class Close extends AppCompatActivity
             nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(false);
             nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(false);
 
-
         }
+
         else
         {
             Toast.makeText(Close.this, "error", Toast.LENGTH_LONG).show();
@@ -185,7 +172,6 @@ public class Close extends AppCompatActivity
                         closeTaskDetails2 = closeData.getCloseUser2();
 
 
-
                         for (int i = 0; i < closeTaskDetails1.size(); i++) {
                             String task_desc = closeTaskDetails1.get(i).getTASK_DES();
                             String assign = closeTaskDetails1.get(i).getTASK_ASSIGN();
@@ -199,7 +185,6 @@ public class Close extends AppCompatActivity
 
 
                         }
-
 
                         for (int i = 0; i < closeTaskDetails2.size(); i++) {
 
@@ -273,9 +258,6 @@ public class Close extends AppCompatActivity
                                     .into(profile);
                         }
 
-
-
-
                     }
 
                 } catch (JSONException e) {
@@ -289,7 +271,6 @@ public class Close extends AppCompatActivity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
 
                         Toast.makeText(Close.this, error.toString(), Toast.LENGTH_LONG).show();
 

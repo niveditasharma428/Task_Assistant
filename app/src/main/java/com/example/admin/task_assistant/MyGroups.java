@@ -111,17 +111,13 @@ public class MyGroups extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-
         pref = getApplication().getSharedPreferences("Options", MODE_PRIVATE);
         name = pref.getString("name", "");
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
-       // name1.setText(name);
-       // email1.setText(email);
 
         pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
         usertyp = pref.getString("usertyp", "");
-
 
         System.out.println("Task_Login:-"+usertyp);
 
@@ -147,7 +143,6 @@ public class MyGroups extends AppCompatActivity
             nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(false);
 
         }
-
         else
         {
             Toast.makeText(MyGroups.this, "error", Toast.LENGTH_LONG).show();
@@ -291,7 +286,15 @@ public class MyGroups extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-        } else if (id == R.id.nav_assigntask) {
+        } else if (id == R.id.nav_mytodo) {
+            Intent intent = new Intent(MyGroups.this, MyTodoTask.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }  else if (id == R.id.nav_mygrouptodo) {
+            Intent intent = new Intent(MyGroups.this, MyGroupTodo.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }else if (id == R.id.nav_assigntask) {
             Intent intent = new Intent(MyGroups.this, TaskAssign.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -320,39 +323,21 @@ public class MyGroups extends AppCompatActivity
             Intent intent = new Intent(MyGroups.this, Add_Contact.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        } else if (id == R.id.nav_mytodo) {
-            Intent intent = new Intent(MyGroups.this, MyTodoTask.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.nav_group) {
             Intent intent = new Intent(MyGroups.this, Group.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
         else if (id == R.id.nav_mygroupTask) {
-            Intent intent = new Intent(MyGroups.this, MyGroups.class);
-            startActivity(intent);
-            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
-        }
-        else if (id == R.id.nav_mygroups) {
-            Intent intent = new Intent(MyGroups.this, MyGroups.class);
-            startActivity(intent);
-            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
-        }
-        else if (id == R.id.nav_mygroups) {
-            Intent intent = new Intent(MyGroups.this, MyGroups.class);
-            startActivity(intent);
-            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
-        }
-        else if (id == R.id.nav_mygroupTask) {
             Intent intent = new Intent(MyGroups.this, MyGroupTask.class);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
-
-
-
-
+        else if (id == R.id.nav_mygroups) {
+            Intent intent = new Intent(MyGroups.this, MyGroups.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+        }
 
 
 

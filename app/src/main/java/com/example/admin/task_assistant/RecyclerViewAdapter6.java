@@ -73,7 +73,6 @@ public class RecyclerViewAdapter6 extends RecyclerView.Adapter<RecyclerViewAdapt
             holder.groupname.setVisibility(View.VISIBLE);
         }
 
-
         holder.iv_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,8 +190,6 @@ public class RecyclerViewAdapter6 extends RecyclerView.Adapter<RecyclerViewAdapt
                        });
 
 
-
-
                    }
 
                    @Override
@@ -200,8 +197,6 @@ public class RecyclerViewAdapter6 extends RecyclerView.Adapter<RecyclerViewAdapt
 
                    }
                });
-
-
 
 
 

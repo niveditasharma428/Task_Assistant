@@ -109,12 +109,9 @@ public class TaskAssign extends AppCompatActivity
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
 
-       // name1.setText(name);
-       // email1.setText(email);
-
         ListOfcontact2 = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view3);
-       // recyclerView.setHasFixedSize(true);
+
         recyclerViewadapter2 = new RecyclerViewAdapter2(ListOfcontact2,getApplicationContext());
         layoutManagerOfrecyclerView2= new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManagerOfrecyclerView2);
@@ -122,6 +119,7 @@ public class TaskAssign extends AppCompatActivity
         ContactName=new ArrayList<String>();
 
         spinnerDropDown2=(Spinner)findViewById(R.id.spinner3);
+        spinnerDropDown2.setPrompt("Select");
 
         loadSpinnerData();
 
@@ -129,7 +127,6 @@ public class TaskAssign extends AppCompatActivity
 
         pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
         usertyp = pref.getString("usertyp", "");
-
 
         System.out.println("Task_Login:-"+usertyp);
 
@@ -154,7 +151,6 @@ public class TaskAssign extends AppCompatActivity
             nav_Menu.findItem(R.id.nav_mygroupTask).setVisible(false);
             nav_Menu.findItem(R.id.nav_mygrouptodo).setVisible(false);
 
-
         }
         else
         {
@@ -167,7 +163,7 @@ public class TaskAssign extends AppCompatActivity
             public void onResponse(String response) {
                 //Toast.makeText(login.this, response, Toast.LENGTH_SHORT).show();
                 try {
-                    // progressDialog.dismiss();
+
                     JSONArray jsonObj = new JSONArray(response);
                     final int numberOfItemsInResp = jsonObj.length();
                     for (int i = 0; i < numberOfItemsInResp; i++) {
@@ -180,7 +176,6 @@ public class TaskAssign extends AppCompatActivity
                         String email = jsonObject.getString("email");
                         System.out.println("email:-"+email);
                         email1.setText(email);
-
 
                         String img = jsonObject.getString("USER_PHOTO");
                         // System.out.println("profile:-"+img);
@@ -196,23 +191,18 @@ public class TaskAssign extends AppCompatActivity
                                     .into(profile);
                         }
 
-
-
-
                     }
 
                 } catch (JSONException e) {
                     Toast.makeText(TaskAssign.this, response, Toast.LENGTH_LONG).show();
                 }
 
-
             }
 
-        },
+            },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
 
                         Toast.makeText(TaskAssign.this, error.toString(), Toast.LENGTH_LONG).show();
 
@@ -224,7 +214,6 @@ public class TaskAssign extends AppCompatActivity
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("mobile", mobile);
                 params.put("usertyp", usertyp);
-
 
                 return params;
             }
@@ -242,7 +231,6 @@ public class TaskAssign extends AppCompatActivity
 
         ArrayList<String> ContactName = new ArrayList<String>();
 
-
         spinnerDropDown2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -259,7 +247,7 @@ public class TaskAssign extends AppCompatActivity
         });
     }
 
-    private void loadSpinnerData() {
+     private void loadSpinnerData() {
 
         int i = 0;
 
@@ -301,7 +289,6 @@ public class TaskAssign extends AppCompatActivity
         requestQueue.add(stringRequest);
     }
 
-
     ProgressDialog progressDialog;
 
     public void taskassign(final int pos) {
@@ -335,7 +322,6 @@ public class TaskAssign extends AppCompatActivity
                         ListOfcontact2.add(mData2);
 
                     }
-
                     recyclerViewadapter2.setData(ListOfcontact2);
                     recyclerView.setAdapter(recyclerViewadapter2);
 
@@ -364,8 +350,6 @@ public class TaskAssign extends AppCompatActivity
                 params.put("name",name);
                 params.put("assign",ContactName.get(pos).toString());
 
-
-
                 return params;
             }
 
@@ -373,17 +357,6 @@ public class TaskAssign extends AppCompatActivity
         RequestQueue requestQueue = Volley.newRequestQueue(TaskAssign.this);
         requestQueue.add(stringRequest);
     }
-
-    /*@Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }*/
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -508,8 +481,6 @@ public class TaskAssign extends AppCompatActivity
             activity = context;
         }
 
-
-
         public int getCount()
         {
             return asr.size();
@@ -524,8 +495,6 @@ public class TaskAssign extends AppCompatActivity
         {
             return (long)i;
         }
-
-
 
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {

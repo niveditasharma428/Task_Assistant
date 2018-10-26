@@ -191,15 +191,11 @@ public class Group extends AppCompatActivity
                                     .into(profile);
                         }
 
-
-
-
                     }
 
                 } catch (JSONException e) {
                     Toast.makeText(Group.this, response, Toast.LENGTH_LONG).show();
                 }
-
 
             }
 
@@ -228,8 +224,6 @@ public class Group extends AppCompatActivity
 
         RequestQueue requestQueue = Volley.newRequestQueue(Group.this);
         requestQueue.add(stringRequest);
-
-
     }
 
     @Override
@@ -240,12 +234,7 @@ public class Group extends AppCompatActivity
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
-       /* if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
 
-
-        }*/
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

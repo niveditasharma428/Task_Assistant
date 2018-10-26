@@ -44,8 +44,8 @@ public class Signin extends AppCompatActivity implements View.OnClickListener {
     RelativeLayout rootLayout, rLayout;
     String usertyp;
     private static Animation shakeAnimation;
-
     private boolean loggedIn = false;
+
     SharedPreferences.Editor editor;
     SharedPreferences pref;
 
@@ -110,7 +110,6 @@ public class Signin extends AppCompatActivity implements View.OnClickListener {
 
 
         Login_Button.setOnClickListener(this);
-
 
         shakeAnimation = AnimationUtils.loadAnimation(this,
                 R.anim.shake);

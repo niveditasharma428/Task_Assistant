@@ -118,7 +118,6 @@ public class User_code extends AppCompatActivity implements View.OnClickListener
                                 editor5.putString("umobile", umobile);
                                 editor5.commit();
 
-
                                 Intent intent=new Intent(User_code.this,Signin.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -133,7 +132,6 @@ public class User_code extends AppCompatActivity implements View.OnClickListener
                                 editor5=pref5.edit();
                                 editor5.putString("umobile", umobile);
                                 editor5.commit();
-
 
                                 Intent intent=new Intent(User_code.this,Signup.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

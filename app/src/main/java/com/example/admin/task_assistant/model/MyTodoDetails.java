@@ -17,10 +17,24 @@ public class MyTodoDetails {
     @Expose
     String taskGroup;
 
-    public MyTodoDetails(String createdBY, String noOfTask, String taskGroup) {
+    @SerializedName("USER_PHOTO")
+    @Expose
+    String image;
+
+    public MyTodoDetails(String createdBY, String noOfTask, String taskGroup, String image) {
         this.createdBY = createdBY;
         this.noOfTask = noOfTask;
         this.taskGroup = taskGroup;
+        this.image = image;
+    }
+
+    public String getImage() {
+
+       return image;
+   }
+
+   public void setImage(String image) {
+        this.image = image;
     }
 
     public String getCreatedBY() {

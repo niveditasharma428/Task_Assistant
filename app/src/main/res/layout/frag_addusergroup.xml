@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <EditText
         android:id="@+id/et_groupname"
         android:layout_width="match_parent"
@@ -14,15 +13,13 @@
         android:hint="Enter Group Name"
         android:maxLines="3"
         android:paddingLeft="10dp"
-        android:textColorHint="@color/grey_dark"
-        />
+        android:textColorHint="@color/grey_dark"/>
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerviewadd"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/LinearLayouts02"

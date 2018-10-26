@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -51,6 +54,8 @@ public class Dashboard extends AppCompatActivity
     CircleImageView image1;
     CircleImageView profile;
     CardView c1,c2,c3,c4,c5;
+
+
 
     private static String DASHBOARD_URL = "https://orgone.solutions/task/dashbord.php";
     private static String PROFILE_URL = "https://orgone.solutions/task/profile.php";
@@ -108,10 +113,9 @@ public class Dashboard extends AppCompatActivity
         email=pref.getString("email", "");
         mobile=pref.getString("mobile", "");
 
-       // name1.setText(name);
-      //  email1.setText(email);
 
         dashboard(DASHBOARD_URL,mobile);
+
 
         pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
         usertyp = pref.getString("usertyp", "");
@@ -145,7 +149,6 @@ public class Dashboard extends AppCompatActivity
         else
         {
             Toast.makeText(Dashboard.this, "error", Toast.LENGTH_LONG).show();
-
 
         }
 
@@ -184,8 +187,6 @@ public class Dashboard extends AppCompatActivity
                         }
 
 
-
-
                     }
 
                 } catch (JSONException e) {
@@ -199,7 +200,6 @@ public class Dashboard extends AppCompatActivity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
 
                         Toast.makeText(Dashboard.this, error.toString(), Toast.LENGTH_LONG).show();
 
@@ -220,7 +220,6 @@ public class Dashboard extends AppCompatActivity
 
         RequestQueue requestQueue = Volley.newRequestQueue(Dashboard.this);
         requestQueue.add(stringRequest);
-
 
     }
 
@@ -398,9 +397,6 @@ public class Dashboard extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
         }
-
-
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

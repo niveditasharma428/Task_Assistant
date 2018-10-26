@@ -17,8 +17,7 @@
         app:civ_border_color="@color/colorPrimaryDark"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp"
-        android:layout_marginLeft="20dp"
-     />
+        android:layout_marginLeft="20dp" />
 
 
 
@@ -50,8 +49,6 @@
             android:fontFamily="sans-serif-light"
             android:textColor="@color/sub_title"
             android:text="Contact Number"/>
-
-
 
 
 
