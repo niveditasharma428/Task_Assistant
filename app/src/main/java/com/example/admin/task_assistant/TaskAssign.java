@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -63,6 +64,8 @@ public class TaskAssign extends AppCompatActivity
     String mobile,name,email,assign,TASK_ID,CREATED_BY,usertyp;
     TextView name1,email1,create;
     CircleImageView profile;
+    LinearLayout ll;
+    ImageView img1;
     ArrayList<String> ContactName;
 
     private static String ASSIGN_TASK_URL = "https://orgone.solutions/task/taskassign.php";
@@ -97,6 +100,8 @@ public class TaskAssign extends AppCompatActivity
         name1 = (TextView)view.findViewById(R.id.name);
         email1 = (TextView)view.findViewById(R.id.mailid);
         profile=(CircleImageView)view.findViewById(R.id.imageView);
+        img1=(ImageView)view.findViewById(R.id.arrow);
+        ll=(LinearLayout)view.findViewById(R.id.profile);
 
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -120,6 +125,26 @@ public class TaskAssign extends AppCompatActivity
 
         spinnerDropDown2=(Spinner)findViewById(R.id.spinner3);
         spinnerDropDown2.setPrompt("Select");
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(TaskAssign.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(TaskAssign.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
 
         loadSpinnerData();
 
@@ -236,6 +261,8 @@ public class TaskAssign extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 int sid = parent.getSelectedItemPosition();
+                ((TextView) view).setTextColor(Color.parseColor("#156995"));
+
                 taskassign(sid);
                 //  Toast.makeText(parent.getContext(), "Android Custom Spinner Example Output..." + sid, Toast.LENGTH_LONG).show();
             }
@@ -396,14 +423,14 @@ public class TaskAssign extends AppCompatActivity
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
 
         }
-        else if (id == R.id.nav_profile) {
+       /* else if (id == R.id.nav_profile) {
             Intent intent=new Intent(TaskAssign.this,Profile.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
 
-        }
+        }*/
         else if (id == R.id.nav_mydashboard) {
             Intent intent=new Intent(TaskAssign.this,Dashboard.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -499,8 +526,8 @@ public class TaskAssign extends AppCompatActivity
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
             TextView txt = new TextView(TaskAssign.this);
-            txt.setPadding(16, 16, 16, 16);
-            txt.setTextSize(16);
+            txt.setPadding(20, 20, 20, 20);
+            txt.setTextSize(17);
             txt.setGravity(Gravity.CENTER_VERTICAL);
             txt.setText(asr.get(position));
             txt.setTypeface(font);
@@ -512,9 +539,9 @@ public class TaskAssign extends AppCompatActivity
             TextView txt = new TextView(TaskAssign.this);
             txt.setGravity(Gravity.CENTER_VERTICAL);
             txt.setPadding(16, 16, 16, 16);
-            txt.setTextSize(16);
+            txt.setTextSize(17);
             txt.setTypeface(font);
-            txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.down, 0);
+            txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.d4, 0);
             txt.setText(asr.get(i));
             txt.setTextColor(Color.parseColor("#212121"));
             return  txt;

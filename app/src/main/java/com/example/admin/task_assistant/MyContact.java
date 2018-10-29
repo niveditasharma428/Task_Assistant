@@ -55,6 +55,8 @@ public class MyContact extends AppCompatActivity
 
     TextView name1,email1;
     CircleImageView circleImageView;
+    LinearLayout ll;
+    ImageView img1;
     LinearLayout layout1;
     CircleImageView profile;
     String mobile,TASK_ID,name,email,usertyp;
@@ -104,6 +106,9 @@ public class MyContact extends AppCompatActivity
         email1 = (TextView)view.findViewById(R.id.mailid);
         profile= (CircleImageView)view. findViewById(R.id.imageView);
         circleImageView= (CircleImageView) findViewById(R.id.image);
+        img1=(ImageView)view.findViewById(R.id.arrow);
+        ll=(LinearLayout)view.findViewById(R.id.profile);
+
         swipeRefreshLayout= (SwipeRefreshLayout) findViewById(R.id.refresh);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -125,6 +130,26 @@ public class MyContact extends AppCompatActivity
        // name1.setText(name);
        // email1.setText(email);
 
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MyContact.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MyContact.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
         ListOfcontact = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view2);
         recyclerView.setHasFixedSize(true);
@@ -368,14 +393,14 @@ public class MyContact extends AppCompatActivity
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
 
         }
-        else if (id == R.id.nav_profile) {
+       /* else if (id == R.id.nav_profile) {
             Intent intent=new Intent(MyContact.this,Profile.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
 
-        }
+        }*/
         else if (id == R.id.nav_mydashboard) {
             Intent intent=new Intent(MyContact.this,Dashboard.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

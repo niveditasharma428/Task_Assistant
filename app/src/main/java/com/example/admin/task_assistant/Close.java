@@ -62,6 +62,8 @@ public class Close extends AppCompatActivity
     RecyclerViewAdapter7 recyclerViewadapter7;
     TextView name1, email1, t3;
     CircleImageView profile;
+    LinearLayout ll;
+    ImageView img1;
     String mobile, TASK_ID, name, email, CREATED_BY, Seen, usertyp;
     TextView txtnorec;
     ImageView no_record;
@@ -105,6 +107,8 @@ public class Close extends AppCompatActivity
         name1 = (TextView) view.findViewById(R.id.name);
         email1 = (TextView) view.findViewById(R.id.mailid);
         profile= (CircleImageView)view. findViewById(R.id.imageView);
+        img1=(ImageView)view.findViewById(R.id.arrow);
+        ll=(LinearLayout)view.findViewById(R.id.profile);
 
         t3 = (TextView) findViewById(R.id.count);
         txtnorec = (TextView)findViewById(R.id.txtnorec);
@@ -117,6 +121,27 @@ public class Close extends AppCompatActivity
         name = pref.getString("name", "");
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Close.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Close.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
 
 
         ListOfcontact4 = new ArrayList<>();
@@ -331,12 +356,12 @@ public class Close extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-        } else if (id == R.id.nav_profile) {
+        } /*else if (id == R.id.nav_profile) {
             Intent intent = new Intent(Close.this, Profile.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-        } else if (id == R.id.nav_mydashboard) {
+        } */else if (id == R.id.nav_mydashboard) {
             Intent intent = new Intent(Close.this, Dashboard.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

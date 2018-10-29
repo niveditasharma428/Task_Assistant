@@ -52,16 +52,7 @@ tools:context=".TaskAssignComment">
     app:cardBackgroundColor="@color/white"
     app:cardPreventCornerOverlap="false">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:hint="Description"
-        android:textSize="18dp"
-        android:padding="5dp"
-        android:textColor="#156995"
-        android:textColorHint="#156995"/>
+
 
     <TextView
         android:id="@+id/etDes"
@@ -71,7 +62,7 @@ tools:context=".TaskAssignComment">
         android:layout_marginLeft="16dp"
         android:hint="Description"
         android:textStyle="bold"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:textSize="16dp"
         android:padding="5dp"
         android:textColor="#696969"

@@ -19,6 +19,7 @@ package com.example.admin.task_assistant;
         import android.view.MenuItem;
         import android.view.MotionEvent;
         import android.view.View;
+        import android.widget.ImageView;
         import android.widget.LinearLayout;
         import android.widget.TextView;
         import android.widget.Toast;
@@ -62,6 +63,8 @@ public class MyGroupTodo extends AppCompatActivity
     RecyclerViewAdapter5 recyclerViewadapter5;
     TextView name1, email1, t3;
     CircleImageView profile;
+    LinearLayout ll;
+    ImageView img1;
     String mobile, TASK_ID, name, email, CREATED_BY, Seen, usertyp;
 
     SharedPreferences pref;
@@ -105,6 +108,8 @@ public class MyGroupTodo extends AppCompatActivity
         name1 = (TextView) view.findViewById(R.id.name);
         email1 = (TextView) view.findViewById(R.id.mailid);
         profile=(CircleImageView)view.findViewById(R.id.imageView);
+        img1=(ImageView)view.findViewById(R.id.arrow);
+        ll=(LinearLayout)view.findViewById(R.id.profile);
         t3 = (TextView) findViewById(R.id.count);
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -114,6 +119,27 @@ public class MyGroupTodo extends AppCompatActivity
         name = pref.getString("name", "");
         email = pref.getString("email", "");
         mobile = pref.getString("mobile", "");
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MyGroupTodo.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MyGroupTodo.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
 
         ListOfcontact4 = new ArrayList<>();
         recyclerView2 = (RecyclerView) findViewById(R.id.my_recycler_view5);
@@ -380,11 +406,11 @@ public class MyGroupTodo extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        Intent i = new Intent(getApplicationContext(), GroupMember.class);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -413,12 +439,12 @@ public class MyGroupTodo extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-        } else if (id == R.id.nav_profile) {
+        } /*else if (id == R.id.nav_profile) {
             Intent intent = new Intent(MyGroupTodo.this, Profile.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-        } else if (id == R.id.nav_mydashboard) {
+        }*/ else if (id == R.id.nav_mydashboard) {
             Intent intent = new Intent(MyGroupTodo.this, Dashboard.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

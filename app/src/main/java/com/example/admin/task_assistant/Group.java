@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,8 @@ public class Group extends AppCompatActivity
 
     TextView name1, email1, t3;
     CircleImageView profile;
+    LinearLayout ll;
+    ImageView img1;
     String mobile, TASK_ID, name, email, CREATED_BY, usertyp,admin_name,admin_mob;
 
     SharedPreferences pref,pref1;
@@ -89,6 +92,8 @@ public class Group extends AppCompatActivity
         name1 = (TextView) view.findViewById(R.id.name);
         email1 = (TextView) view.findViewById(R.id.mailid);
         profile=(CircleImageView)view.findViewById(R.id.imageView);
+        img1=(ImageView)view.findViewById(R.id.arrow);
+        ll=(LinearLayout)view.findViewById(R.id.profile);
         t3 = (TextView) findViewById(R.id.count);
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -107,6 +112,26 @@ public class Group extends AppCompatActivity
         System.out.println("DivyaAdminCred:-"+admin_name+"--"+admin_mob);
         pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
         usertyp = pref.getString("usertyp", "");
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Group.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Group.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
 
 
         System.out.println("Task_Login:-"+usertyp);
@@ -263,12 +288,12 @@ public class Group extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-        } else if (id == R.id.nav_profile) {
+        }/* else if (id == R.id.nav_profile) {
             Intent intent = new Intent(Group.this, Profile.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-        } else if (id == R.id.nav_mydashboard) {
+        }*/ else if (id == R.id.nav_mydashboard) {
             Intent intent = new Intent(Group.this, Dashboard.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

@@ -149,7 +149,9 @@ public class GroupMember extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(getApplicationContext(), Group.class);
+
+
+        Intent i = new Intent(getApplicationContext(), Dashboard.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

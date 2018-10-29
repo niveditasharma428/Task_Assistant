@@ -61,7 +61,6 @@ public class TaskAssignComment extends AppCompatActivity implements View.OnClick
     ArrayList<String> ContactName;
 
 
-
     private static String REASSIGN_URL = "https://orgone.solutions/task/taskreasign.php";
     private static String TASK_ASSIGN_DETAILS_URL = "https://orgone.solutions/task/taskdetails.php";
     private static String TASK_CLOSE_URL = "https://orgone.solutions/task/taskclose.php";
@@ -133,10 +132,7 @@ public class TaskAssignComment extends AppCompatActivity implements View.OnClick
 
         button_Reassign.setOnClickListener(this);
 
-
     }
-
-
     public void taskDetails(final String TASK_ID) {
 
         int i = 0;

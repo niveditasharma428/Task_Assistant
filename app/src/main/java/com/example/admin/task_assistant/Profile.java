@@ -47,7 +47,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
-    TextView tvMainEmail, tvMobile, tvMainName,tvCount;
+    TextView tvMainEmail, tvMobile, tvMainName,tvCount,tvPassword;
     AlertDialog alertdialog;
     int PICK_IMAGE_REQUEST = 111;
     Button upload;
@@ -67,19 +67,19 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     private static String IMAGE_URL = "https://orgone.solutions/task/imgchk.php";
     private static String PROFILE_URL = "https://orgone.solutions/task/profile.php";
 
-    public void attachBaseContext(Context newBase){
+  /*  public void attachBaseContext(Context newBase){
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+        /*CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("font/Arkhip_font.ttf")
                 .setFontAttrId(R.attr.fontPath)
-                .build());
+                .build());*/
 
         setContentView(R.layout.activity_profile);
 
@@ -110,6 +110,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         tvMainEmail = (TextView) findViewById(R.id.profile_email);
         tvMobile = (TextView) findViewById(R.id.profile_mobile);
         tvCount = (TextView) findViewById(R.id.count);
+        tvPassword=(TextView)findViewById(R.id.profile_password);
 
         imageView= (ImageView) findViewById(R.id.profile_image);
         upload= (Button) findViewById(R.id.upload);
@@ -126,7 +127,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         imageView.setOnClickListener(this);
 
         mobile =pref.getString("mobile", "");
-        tvMobile.setText(mobile);
+
 
         count =pref.getString("count", "");
         tvCount.setText(count);
@@ -147,6 +148,34 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
 
 */
+        tvMainEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this,Edit.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+
+            }
+        });
+
+        tvMobile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this,Edit.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            }
+        });
+
+        tvPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this,Edit.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+            }
+        });
+
         progressDialog = new ProgressDialog(Profile.this);
         progressDialog.setMessage("Loading, please wait...");
         progressDialog.show();
@@ -222,6 +251,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         RequestQueue requestQueue = Volley.newRequestQueue(Profile.this);
         requestQueue.add(stringRequest);
+
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,6 +18,7 @@ package com.example.admin.task_assistant;
         import android.view.MenuItem;
         import android.view.MotionEvent;
         import android.view.View;
+        import android.widget.ImageView;
         import android.widget.LinearLayout;
         import android.widget.TextView;
         import android.widget.Toast;
@@ -61,6 +62,8 @@ public class GroupCloseTask extends AppCompatActivity
     RecyclerViewAdapter7 recyclerViewadapter7;
     TextView name1, email1, t3;
     CircleImageView profile;
+    LinearLayout ll;
+    ImageView img1;
     String mobile, TASK_ID, name, email, CREATED_BY, Seen, usertyp;
 
     SharedPreferences pref;
@@ -105,6 +108,8 @@ public class GroupCloseTask extends AppCompatActivity
         name1 = (TextView) view.findViewById(R.id.name);
         email1 = (TextView) view.findViewById(R.id.mailid);
         profile= (CircleImageView)view. findViewById(R.id.imageView);
+        img1=(ImageView)view.findViewById(R.id.arrow);
+        ll=(LinearLayout)view.findViewById(R.id.profile);
 
         t3 = (TextView) findViewById(R.id.count);
 
@@ -121,6 +126,26 @@ public class GroupCloseTask extends AppCompatActivity
         mobile = pref.getString("mobile", "");
        // name1.setText(name);
        // email1.setText(email);
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(GroupCloseTask.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(GroupCloseTask.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
 
         ListOfcontact4 = new ArrayList<>();
        // recyclerView6 = (RecyclerView) findViewById(R.id.my_recycler_view4);
@@ -343,12 +368,12 @@ public class GroupCloseTask extends AppCompatActivity
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-        } else if (id == R.id.nav_profile) {
+        } /*else if (id == R.id.nav_profile) {
             Intent intent = new Intent(GroupCloseTask.this, Profile.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-        } else if (id == R.id.nav_mydashboard) {
+        }*/ else if (id == R.id.nav_mydashboard) {
             Intent intent = new Intent(GroupCloseTask.this, Dashboard.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

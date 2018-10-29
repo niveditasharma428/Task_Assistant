@@ -131,6 +131,7 @@ public class NewTask extends AppCompatActivity {
                                        int position, long id) {
 
                 ((TextView) parent.getChildAt(0)).setTextSize(18);
+                ((TextView) view).setTextColor(Color.parseColor("#156995"));
                 // Get select item
                 int sid=spinnerDropDown.getSelectedItemPosition();
                // Toast.makeText(getBaseContext(), "You have selected City : " + priority[sid],
@@ -147,7 +148,7 @@ public class NewTask extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                ((TextView) view).setTextColor(Color.parseColor("#156995"));
                 ((TextView) parent.getChildAt(0)).setTextSize(20);
                 // Get select item
                 int s1id=spinnerDropDown2.getSelectedItemPosition();

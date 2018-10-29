@@ -9,9 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.example.admin.task_assistant.adapter.GroupTaskAdapter;
-
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -99,11 +97,12 @@ public class GroupTaskAssistant extends AppCompatActivity {
         });
 */
 
+
     }
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(getApplicationContext(), Group.class);
+        Intent i = new Intent(getApplicationContext(), Dashboard.class);
         /*i.putExtra("groupmembers", al);
         i.putExtra("groupname", groupname);*/
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

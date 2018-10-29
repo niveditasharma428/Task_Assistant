@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,8 +53,9 @@ public class Dashboard extends AppCompatActivity
     TextView close_task,re_assign,in_process,done,active;
     SharedPreferences pref,prefm;
     TextView name1,email1;
-    CircleImageView image1;
     CircleImageView profile;
+    LinearLayout ll;
+    ImageView img1;
     CardView c1,c2,c3,c4,c5;
 
 
@@ -60,17 +63,11 @@ public class Dashboard extends AppCompatActivity
     private static String DASHBOARD_URL = "https://orgone.solutions/task/dashbord.php";
     private static String PROFILE_URL = "https://orgone.solutions/task/profile.php";
 
-    public void attachBaseContext(Context newBase){
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("font/Arkhip_font.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build());
 
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -104,8 +101,10 @@ public class Dashboard extends AppCompatActivity
         View view= navigationView.getHeaderView(0);
         name1 = (TextView)view.findViewById(R.id.name);
         email1 = (TextView)view.findViewById(R.id.mailid);
-        image1= (CircleImageView)view. findViewById(R.id.imageView);
         profile= (CircleImageView)view. findViewById(R.id.imageView);
+        img1=(ImageView)view.findViewById(R.id.arrow);
+        ll=(LinearLayout)view.findViewById(R.id.profile);
+
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
@@ -115,6 +114,26 @@ public class Dashboard extends AppCompatActivity
 
 
         dashboard(DASHBOARD_URL,mobile);
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Dashboard.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Dashboard.this,Profile.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
 
 
         pref=getApplication().getSharedPreferences("Options",MODE_PRIVATE);
@@ -346,14 +365,14 @@ public class Dashboard extends AppCompatActivity
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
 
         }
-        else if (id == R.id.nav_profile) {
+      /*  else if (id == R.id.nav_profile) {
             Intent intent=new Intent(Dashboard.this,Profile.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
 
-        }
+        }*/
 
         else if (id == R.id.nav_add_contact) {
             Intent intent=new Intent(Dashboard.this,Add_Contact.class);

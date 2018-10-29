@@ -104,6 +104,7 @@
             android:name=".GroupCloseTask"
             android:label="@string/title_activity_group_close_task"
             android:theme="@style/AppTheme2" />
+        <activity android:name=".Edit"></activity>
     </application>
 
 </manifest>
